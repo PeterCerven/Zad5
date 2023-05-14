@@ -1,4 +1,4 @@
-@extends('layout')
+
 <?php
 /*
 $v1 = '\frac{4s^2+2}{2s^3+40s+4}';
@@ -51,11 +51,21 @@ $substring = substr($output, $index + 6); // Vytvoríme nový reťazec obsahujú
 ?>
 
 
-@section('content')
+<x-layout>
     <div class="container mt-5">
         <div class="d-flex align-items-center justify-content-center">
-
+            <div class="mb-6">
+                <a href="/teacher" class="bg-black text-white rounded py-2 px-4 hover:bg-black">
+                    Go to teacher's page
+                </a>
+            </div>
+            <div class="mb-6">
+                <a href="/student" class="bg-black text-white rounded py-2 px-4 hover:bg-black">
+                    Go to student's page
+                </a>
+            </div>
         </div>
     </div>
-@endsection
+
+</x-layout>
 

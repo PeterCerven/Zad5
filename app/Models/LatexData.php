@@ -29,4 +29,9 @@ class LatexData extends Model
     {
         return self::where('name', $name)->first();
     }
+
+    public function assignments()
+    {
+        return $this->hasMany(Assignment::class);
+    }
 }
