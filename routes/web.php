@@ -21,7 +21,8 @@ Route::get('/', function () {
 	return view('main');
 })->name('home');
 
-Route::post('/main', [FormController::class, 'processForm'])->name('form.process');
+Route::post('/main', [FormController::class, 'processForm'])
+    ->name('form.process');
 
 Route::get('/teacher', [TeacherController::class, 'show'])
     ->middleware('is_teacher');
