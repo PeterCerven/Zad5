@@ -21,7 +21,7 @@ class DBController extends Controller
         $files = scandir($dir);
         foreach ($files as $filename) {
             if (preg_match('/\.tex$/', $filename)) {
-                if (!LatexData::isLatexFileinDB($filename)) {
+                if (!LatexData::isLatexFileInDB($filename)) {
                     $file_path = $dir . DIRECTORY_SEPARATOR . $filename;
                     $file_contents = File::get($file_path);
                     DBController::processSections($filename, $file_contents); // spracovanie a uloženie úlohy do databázy

@@ -9,7 +9,20 @@ class LatexData extends Model
 {
     use HasFactory;
     protected $table = 'latex';
-    protected $fillable = ['name', 'section', 'task', 'equation', 'eq_text', 'solution', 'eq_conditions', 'image_name'];
+    protected string $name = 'name';
+    protected $fillable = [
+        'name',
+        'section',
+        'task',
+        'equation',
+        'eq_text',
+        'solution',
+        'eq_conditions',
+        'image_name',
+        'from',
+        'to',
+        'points',
+    ];
 
     public function __construct($name='', $section='', $task='', $equation='', $eq_text='', $solution='', $eq_conditions='', $image_name='')
     {
@@ -25,7 +38,7 @@ class LatexData extends Model
             'image_name' => $image_name,
         ]);
     }
-    public static function isLatexFileinDB($name)
+    public static function isLatexFileInDB($name)
     {
         return self::where('name', $name)->first();
     }

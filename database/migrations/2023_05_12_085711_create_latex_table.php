@@ -22,6 +22,9 @@ return new class extends Migration
             $table->string('solution', 100)->charset('utf8mb4')->collation('utf8mb4_slovak_ci')->default('');
             $table->string('eq_conditions', 100)->charset('utf8mb4')->collation('utf8mb4_slovak_ci')->default('');
             $table->string('image_name', 40)->charset('utf8mb4')->collation('utf8mb4_slovak_ci')->default('');
+            $table->date('from')->nullable();
+            $table->date('to')->nullable();
+            $table->integer('points')->default(5);
 
             $table->timestamps();
         });
