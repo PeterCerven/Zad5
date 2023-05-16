@@ -56,7 +56,7 @@ class DBController extends Controller
     }
     static private function processSection($name, $sectionTitle, $sectionContent) {
         $section = $sectionTitle;
-        // Získanie textu úlohy
+        // Získanie  textu úlohy
         $pattern_text = '/\\\begin\{task}\s*(.*?)\\\begin\{equation\*}/s';
         preg_match($pattern_text, $sectionContent, $matches);
         $task = trim($matches[1]);
@@ -64,7 +64,7 @@ class DBController extends Controller
         $pattern_rovnica = '/\\\begin\{equation\*}(.+?)\\\end\{equation\*}/s';
         preg_match($pattern_rovnica, $sectionContent, $matches);
         $equation = trim($matches[1]);
-        $pattern_pokec = '/\\\end{equation\*}(.+?)\\\/';
+        $pattern_pokec = '/\\\end{equation\*}(.+?)\\\/s';
         preg_match($pattern_pokec, $sectionContent, $matches);
         if (count($matches) > 0) {
             $eq_text = trim($matches[1]);
@@ -73,21 +73,23 @@ class DBController extends Controller
         }
         $pattern_res = '/\\\begin{solution}\s*\\\begin{equation\*}\s*(.+?)\\\end{equation\*}\s*\\\end{solution}/s';
         preg_match($pattern_res, $sectionContent, $matches);
-        $solution = $matches[1];
+        $solution = trim($matches[1]);
+
         // Regulárny výraz pre získanie informácie o začiatočných podmienkach
-        $pattern_vztah = '/\$y\((.*?)\)=(-?[0-9]+)\s*,\s*\$y\((.*?)\)=(-?[0-9]+)\s*,\s*\$y\((.*?)\)=(-?[0-9]+)\s*/';
+        $pattern_vztah = '/\\\end\{equation\*}(.*?)\\\end\{task}/s';
         // Získanie informácií o začiatočných podmienkach
         preg_match($pattern_vztah, $sectionContent, $matches);
+        $eq_conditions = '';
         if (count($matches) > 0) {
-            $count_matches = count($matches);
-            $eq_conditions = '';
-            for ($i = 1; $i < $count_matches; $i+=2) {
-                $eq_conditions .= $matches[$i] . ' = ' . $matches[$i+1] . ', ';
+            $tmp = $matches[1];
+            $startMarker = '\\';
+            $startIndex = strpos($tmp, $startMarker);
+            if ($startIndex>0){
+                $result = substr($tmp, $startIndex+2);
+                $eq_conditions = trim($result);
             }
-            $eq_conditions = rtrim($eq_conditions, ', ');
-        } else {
-            $eq_conditions = '';
         }
+
         // Regulárny výraz pre získanie názvu obrázku
         $pattern_pic = '/\\\includegraphics\{(.+?)}/';
         // Získanie názvu obrázku
