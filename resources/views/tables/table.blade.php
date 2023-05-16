@@ -1,8 +1,6 @@
 <x-layout>
     <div class="container">
-        @if ($users->count() == 0)
-            <h2>No users found</h2>
-        @else
+        @if($users)
             <table id="table" class="table display table-striped table-bordered">
                 <thead>
                 <tr>
