@@ -80,5 +80,10 @@
                 @endforeach
             </div>
         @endif
+            <div class="mb-6">
+                <a href="/{{route('teacher.table')}}" class="bg-black text-white rounded py-2 px-4 hover:bg-black">
+                    See table
+                </a>
+            </div>
     </div>
 </x-layout>

@@ -25,6 +25,7 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->enum('status', ['taken', 'submitted']);
             $table->enum('verdict', ['good', 'bad']);
+            $table->integer('points_earned');
             $table->string('answer');
             $table->timestamps();
         });
