@@ -15,7 +15,7 @@ class DBController extends Controller
         $this->conn = DB::connection()->getPdo();
     }
     */
-    public static function workwithLatexFiles()
+    public static function workWithLatexFiles()
     {
         $dir = public_path('latex');
         $files = scandir($dir);

@@ -37,3 +37,7 @@ Route::post('/users/authenticate', [UserController::class, 'authenticate']);
 
 Route::post('/logout', [UserController::class, 'logout'])
     ->middleware('auth');
+
+Route::post('/file/edit/{name}', [TeacherController::class, 'edit'])
+    ->name('file.edit')
+    ->middleware('is_teacher');

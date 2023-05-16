@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('task', 200)->charset('utf8mb4')->collation('utf8mb4_slovak_ci')->default('');
             $table->string('equation', 100)->charset('utf8mb4')->collation('utf8mb4_slovak_ci')->default('');
             $table->string('eq_text', 200)->charset('utf8mb4')->collation('utf8mb4_slovak_ci')->default('');
-            $table->string('solution', 100)->charset('utf8mb4')->collation('utf8mb4_slovak_ci')->default('');
+            $table->string('solution', 200)->charset('utf8mb4')->collation('utf8mb4_slovak_ci')->default('');
             $table->string('eq_conditions', 100)->charset('utf8mb4')->collation('utf8mb4_slovak_ci')->default('');
             $table->string('image_name', 40)->charset('utf8mb4')->collation('utf8mb4_slovak_ci')->default('');
             $table->date('from')->nullable();
