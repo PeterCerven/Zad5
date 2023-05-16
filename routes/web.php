@@ -41,3 +41,11 @@ Route::post('/logout', [UserController::class, 'logout'])
 Route::post('/file/edit/{name}', [TeacherController::class, 'edit'])
     ->name('file.edit')
     ->middleware('is_teacher');
+
+Route::get('/table', [TeacherController::class, 'table'])
+    ->name('teacher.table')
+    ->middleware('is_teacher');
+
+Route::get('/table/{student}', [TeacherController::class, 'studentTable'])
+    ->name('teacher.studentTable')
+    ->middleware('is_teacher');
