@@ -22,7 +22,7 @@ if ($en){
     $to = "Do";
     $point = "Body";
     $edit = "Edituj";
-    $seeTable = "Pozri taabuľku";
+    $seeTable = "Pozri tabuľku";
 }
 ?>
 <x-layout>

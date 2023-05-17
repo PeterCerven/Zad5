@@ -1,3 +1,24 @@
+<?php
+if (!session()->has('language')) {
+    session(['language' => 'english']);
+}
+$en = false;
+if (session('language') == 'english') {
+    $en = true;
+}
+if ($en){
+    $name = "Name";
+    $Surname = "Surname";
+    $exercises = "Generated exercises";
+    $points = "Earned Points";
+
+} else {
+    $name = "Meno";
+    $Surname = "Priezvisko";
+    $exercises = "Generované úlohy";
+    $points = "Získané body";
+}
+?>
 <x-layout>
     <div class="container">
         @if($users)
@@ -5,10 +26,10 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Surname</th>
-                    <th>Generated exercises</th>
-                    <th>Earned Points</th>
+                    <th>{{ $name }}</th>
+                    <th>{{ $Surname }}</th>
+                    <th>{{ $exercises }}</th>
+                    <th>{{ $points }}</th>
                 </tr>
                 </thead>
                 <tbody>

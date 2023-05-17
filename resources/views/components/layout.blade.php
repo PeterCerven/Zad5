@@ -1,52 +1,25 @@
 <?php
-
 use App\Http\Controllers\DBController;
-
 if (!session()->has('language')) {
     session(['language' => 'english']);
 }
-
-
 $en = false;
 if (session('language') == 'english') {
     $en = true;
 }
-
 DBController::workWithLatexFiles();
-
 if ($en){
     $welcome  = "Welcome";
     $action = "Action";
     $logout = "Logout";
     $login = "Login";
-    $noFiles = "No files found";
-    $exercise = "Exercises";
 
-
-
-
-
-    $todowork = "Assignments";
-    $norecords = "No records";
-    $records = "from";
-    $showing = "Showing";
 } else {
     $welcome  = "Vitaj";
     $action = "Akcia";
     $logout = "Odhlásenie";
     $login = "Prihlásenie";
-    $noFiles = "Žiadne súbory";
-    $exercise = "Cvičenia";
-
-    $todowork = "Zadania";
-    $show = "Zobraz";
-    $filter = "Hľadaj";
-    $norecords = "Žiadny záznam";
-    $records = "z";
-    $showing = "Zobrazujem";
 }
-
-
 
 $equationFromDatabase = "y^{'''}(t)+8y^{''}(t)+19y^{'}(t)+12y(t)=u(t)";
 $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
@@ -55,44 +28,6 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
     <!DOCTYPE html>
 <html lang="sk">
 <head>
-    <style>
-        input:valid {
-            border: darkseagreen solid 3px;
-        }
-
-        input:invalid {
-            border: darkred solid 3px;
-        }
-
-        .navbar {
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 99;
-            overflow: hidden;
-            background-color: #f1f1f1;
-        }
-
-        html {
-            scroll-padding-top: 100px;
-        }
-
-        .table-hover tbody tr:hover td {
-            background: cornflowerblue;
-        }
-
-        input:valid {
-            border: darkseagreen solid 3px;
-        }
-
-        input:invalid {
-            border: darkred solid 3px;
-        }
-
-        /* divocina */
-        html, body {
-            font-family: monospace;
-        }
 
     </style>
     <meta charset="UTF-8">
@@ -246,7 +181,7 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
                     <use xlink:href="#bootstrap"/>
                 </svg>
             </a>
-            <span class="mb-3 mb-md-0 text-muted">&copy; 2023 Martin Jucha, ...</span>
+            <span class="mb-3 mb-md-0 text-muted">&copy; 2023 Andrej Červeň, Martin Király, Martin Jucha a Peter Bugoš</span>
         </div>
 
         <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
