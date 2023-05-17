@@ -11,6 +11,11 @@
 
             @if($generatedAssignment==null)
                 <p>no assigments</p>
+                @if(session('message'))
+                    <div class="alert alert-success">
+                        {{ session('message') }}
+                    </div>
+                @endif
             @else
 
 
