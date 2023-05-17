@@ -14,69 +14,59 @@ class StudentController extends Controller
     public function show()
     {
 
-        $generatedAssignment= [];
+        $generatedAssignment = [];
 
-        return view('student', compact('generatedAssignment') );
+        return view('student', compact('generatedAssignment'));
 
     }
 
     public function generateNewTask()
     {
-        $allAssignments = DB::table('latex')
-            ->select(
-                'id',
-                'points',
-                'from',
-                'to',
-                'section',
-                'task',
-                'equation',
-                'solution',
-            )
-            ->get()
-            ->toArray();
+            $allAssignments = DB::table('latex')
+                ->select(
+                    'id',
+                    'points',
+                    'from',
+                    'to',
+                    'section',
+                    'task',
+                    'equation',
+                    'solution',
+                )
+                ->get()
+                ->toArray();
 
-        $randomNumber = mt_rand(0, count($allAssignments) - 1);
-        $generatedAssignment = array_values($allAssignments)[$randomNumber];
+            $studentId = auth()->user()->id;
+            $existingAssignments = DB::table('assignments')
+                ->where('user_id', $studentId)
+                ->pluck('latex_id')
+                ->toArray();
 
-
-        $studentsAssignments = DB::table('assignments')
-            ->leftJoin('latex', 'assignments.latex_id', '=', 'latex.id')
-            ->leftJoin('users', 'assignments.user_id', '=', 'users.id')
-            ->where('users.id', '=', auth()->user()->id)
-            ->insert([
-                'points_earned' => 0,
-                'created_at' => now(),
-                'updated_at' => now(),
-                'user_id' => auth()->user()->id,
-                'status' => Status::taken,
-                'verdict' => Verdict::bad,
-                'answer' => '',
-                'latex_id' => $generatedAssignment->id,
-            ]);
+        $availableAssignments = array_values(array_filter($allAssignments, function ($assignment) use ($existingAssignments) {
+            return !in_array($assignment->id, $existingAssignments);
+        }));
 
 
+        if (empty($availableAssignments)) {
+                //
+                return redirect()->back()->with('message', 'Žiadne úlohy nie sú k dispozícii.');
+            }
 
+            $randomNumber = mt_rand(0, count($availableAssignments) - 1);
+            $generatedAssignment = $availableAssignments[$randomNumber];
 
-        return view('student', compact('generatedAssignment'));
-    }
-    public function Janko(){
-        $studentsAssignments = DB::table('assignments')
-            ->leftJoin('latex', 'assignments.latex_id', '=', 'latex.id')
-            ->leftJoin('users', 'assignments.user_id', '=', 'users.id')
-            //->where('users.id', '=', $user->id)
-            ->insert([
-                //'points_earned' => $generatedAssignment->points,
-                'created_at' => now(),
-                'updated_at' => now(),
-                //'user_id' => $user->id,
-                'status' => 'unsubmitted',
-                'verdict' => 'ungraded',
-                'answer' => '',
-                //'latex_id' => $generatedAssignment->id,
-            ]);
-    }
+            DB::table('assignments')
+                ->insert([
+                    'points_earned' => 0,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                    'user_id' => $studentId,
+                    'status' => Status::taken,
+                    'verdict' => Verdict::bad,
+                    'answer' => '',
+                    'latex_id' => $generatedAssignment->id,
+                ]);
 
-
-
+            return view('student', compact('generatedAssignment'));
+        }
 }
