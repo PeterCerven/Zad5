@@ -15,13 +15,16 @@ class StudentController extends Controller
     {
 
         $generatedAssignment = [];
+        $assignments = [];
 
-        return view('student', compact('generatedAssignment'));
+        return view('student', compact('generatedAssignment', 'assignments'));
 
     }
 
     public function generateNewTask()
+
     {
+        $assignments = [];
             $allAssignments = DB::table('latex')
                 ->select(
                     'id',
@@ -67,6 +70,109 @@ class StudentController extends Controller
                     'latex_id' => $generatedAssignment->id,
                 ]);
 
-            return view('student', compact('generatedAssignment'));
+            return view('student', compact('generatedAssignment', 'assignments'));
+        }
+
+        public function showTasks (){
+
+            $studentId = auth()->user()->id;
+            $assignments = DB::table('assignments')
+                ->join('latex', 'assignments.latex_id', '=', 'latex.id')
+                ->select(
+                    'assignments.id',
+                    'assignments.points_earned',
+                    'assignments.status',
+                    'assignments.verdict',
+                    'assignments.answer',
+                    'latex.points',
+                    'latex.from',
+                    'latex.to',
+                    'latex.section',
+                    'latex.task',
+                    'latex.equation',
+                    'latex.solution',
+                )
+                ->where('assignments.user_id', $studentId)
+                ->get()
+                ->toArray();
+
+            return view('studentTasks', compact('assignments'));
+        }
+
+        public function showTask($assignment_id)
+        {
+            $studentId = auth()->user()->id;
+            $assignment = DB::table('assignments')
+                ->join('latex', 'assignments.latex_id', '=', 'latex.id')
+                ->select(
+                    'assignments.id',
+                    'assignments.points_earned',
+                    'assignments.status',
+                    'assignments.verdict',
+                    'assignments.answer',
+                    'latex.points',
+                    'latex.from',
+                    'latex.to',
+                    'latex.section',
+                    'latex.task',
+                    'latex.equation',
+                    'latex.solution',
+                )
+                ->where('assignments.user_id', $studentId)
+                ->where('assignments.id', $assignment_id)
+                ->get();
+
+            return view('studentTask', compact('assignment'));
+
+
+        }
+
+        public function submitTask ($assignment_id)
+        {
+            $studentId = auth()->user()->id;
+            $assignment = DB::table('assignments')
+                ->join('latex', 'assignments.latex_id', '=', 'latex.id')
+                ->select(
+                    'assignments.id',
+                    'assignments.points_earned',
+                    'assignments.status',
+                    'assignments.verdict',
+                    'assignments.answer',
+                    'latex.points',
+                    'latex.from',
+                    'latex.to',
+                    'latex.section',
+                    'latex.task',
+                    'latex.equation',
+                    'latex.solution',
+                )
+                ->where('assignments.user_id', $studentId)
+                ->where('assignments.id', $assignment_id)
+                ->get()
+                ->toArray();
+
+
+
+            $answer = request()->input('answer');
+
+            $verdict = Verdict::bad;
+            $points_earned = 0;
+
+            if ($answer == $assignment[0]->solution) {
+                $verdict = Verdict::good;
+                $points_earned = $assignment[0]->points;
+            }
+
+            DB::table('assignments')
+                ->where('id', $assignment_id)
+                ->update([
+                    'answer' => $answer,
+                    'verdict' => $verdict,
+                    'points_earned' => $points_earned,
+                    'status' => Status::submitted,
+                ]);
+
+            return redirect()->back()->with('message', 'Úloha bola odoslaná.');
+
         }
 }

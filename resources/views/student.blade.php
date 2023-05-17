@@ -7,6 +7,14 @@
                     type="submit">
                     Generuj novú úlohu
                 </button>
+
+            </form>
+            <form method="get" action="/student/showTasks">
+                <button
+                    class="btn btn-success"
+                    type="submit">
+                    Zobraz úlohy
+                </button>
             </form>
 
             @if($generatedAssignment==null)
@@ -34,9 +42,13 @@
 
 
 
-        </div>
-        <div class="side">
+
 
         </div>
     </div>
+        <div class="side">
+    </div>
+
+
+
 </x-layout>
