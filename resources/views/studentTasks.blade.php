@@ -1,9 +1,43 @@
+<?php
+if (!session()->has('language')) {
+    session(['language' => 'english']);
+}
+$en = false;
+if (session('language') == 'english') {
+    $en = true;
+}
+if ($en){
+    $aTasks = "Assigned tasks";
+    $mPoints = "Max. Points";
+    $noAssigments = "No Assigments found";
+    $points = "Given points";
+    $from = "From";
+    $to = "To";
+    $answer = "Answer";
+    $status = "Status";
+    $stassignments = "Assignment";
+    $section = "Section";
+    $oAssigments = "Open assigment";
+} else {
+    $aTasks = "Pridelené úlohy";
+    $mPoints = "Max. bodov";
+    $noAssigments = "Neboli nájdené žiadne úlohy";
+    $points = "Body";
+    $from = "Od";
+    $to = "Do";
+    $answer = "Odpoved";
+    $status = "Stav";
+    $stassignments = "Pridelenie";
+    $section = "Sekcia";
+    $oAssigments = "Otvor pridelenie";
+}
+?>
 <x-layout>
     <div class="container mt-5">
         <div class="align-items-center justify-content-center">
 
             @if(count($assignments) == 0)
-                <p>no assigments</p>
+                <p>{{$noAssigments}}</p>
                 @if(session('message'))
                     <div class="alert alert-success">
                         {{ session('message') }}
@@ -11,18 +45,18 @@
                 @endif
 
             @else
-                <h1>Assigned tasks</h1>
+                <h1>{{$aTasks}}</h1>
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th scope="col">Max. Points</th>
-                        <th scope="col">Section</th>
-                        <th scope="col">Assignment</th>
-                        <th scope="col">Given Points</th>
-                        <th scope="col">From</th>
-                        <th scope="col">To</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Answer</th>
+                        <th scope="col">{{$mPoints}}</th>
+                        <th scope="col">{{$section}}</th>
+                        <th scope="col">{{$stassignments}}</th>
+                        <th scope="col">{{$points}}</th>
+                        <th scope="col">{{$from}}</th>
+                        <th scope="col">{{$to}}</th>
+                        <th scope="col">{{$status}}</th>
+                        <th scope="col">{{$answer}}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -37,7 +71,7 @@
                             <td>{{ $assignment->status }}</td>
                             <td>
                                 <form method="get" action="{{ url('student/showTask', $assignment->id) }}">
-                                    <button type="submit">Open Assignment</button>
+                                    <button type="submit">{{$oAssigments}}</button>
                                 </form>
 
                             </td>

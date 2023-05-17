@@ -1,3 +1,27 @@
+<?php
+if (!session()->has('language')) {
+    session(['language' => 'english']);
+}
+$en = false;
+if (session('language') == 'english') {
+    $en = true;
+}
+if ($en){
+    $set = "Generate a new task";
+    $show = "Show task";
+    $noAssigments = "no assigments";
+    $points = "Points";
+    $from = "From";
+    $to = "To";
+} else {
+    $set = "Generuj novú úlohu";
+    $show = "Zobraz úlohy";
+    $noAssigments = "žiadne úlohy";
+    $points = "Body";
+    $from = "Od";
+    $to = "Do";
+}
+?>
 <x-layout>
     <div class="container mt-5">
         <div class="d-flex align-items-center justify-content-center">
@@ -5,7 +29,7 @@
                 <button
                     class="btn btn-success"
                     type="submit">
-                    Generuj novú úlohu
+                    {{$set}}
                 </button>
 
             </form>
@@ -13,12 +37,12 @@
                 <button
                     class="btn btn-success"
                     type="submit">
-                    Zobraz úlohy
+                    {{$show}}
                 </button>
             </form>
 
             @if($generatedAssignment==null)
-                <p>no assigments</p>
+                <p>{{$noAssigments}}</p>
                 @if(session('message'))
                     <div class="alert alert-success">
                         {{ session('message') }}
@@ -28,9 +52,9 @@
 
 
                     <p>ID: {{ $generatedAssignment->id }}</p>
-                    <p>Points: {{ $generatedAssignment->points }}</p>
-                    <p>From: {{ $generatedAssignment->from }}</p>
-                    <p>To: {{ $generatedAssignment->to }}</p>
+                    <p>{{$points}}: {{ $generatedAssignment->points }}</p>
+                    <p>{{$from}}: {{ $generatedAssignment->from }}</p>
+                    <p>{{$to}}: {{ $generatedAssignment->to }}</p>
 
 
 

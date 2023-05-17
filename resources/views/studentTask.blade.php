@@ -1,12 +1,40 @@
+<?php
+if (!session()->has('language')) {
+    session(['language' => 'english']);
+}
+$en = false;
+if (session('language') == 'english') {
+    $en = true;
+}
+if ($en){
+    $tasks = "Task";
+    $equation = "Equation";
+    $noAssigments = "No Assigments found";
+    $points = "Points";
+    $sub = "Submit";
+    $submited = "Task already submitted";
+    $noTask = "No task selected";
+    $enterT = "Enter_text";
+} else {
+    $tasks = "Úloha";
+    $equation = "Rovnica";
+    $noAssigments = "Neboli nájdené žiadne úlohy";
+    $points = "Body";
+    $sub = "Predložiť";
+    $submited = "Úloha už predložená";
+    $noTask = "Žiadna selekovaná úloha";
+    $enterT = "Zadaj_text";
+}
+?>
 <x-layout>
     <div class="container mt-5">
         <div class="align-items-center justify-content-center">
 
 
             @if($assignment!=null)
-                <h1 class="text-xl" style="font-weight: bold">Task  {{$assignment[0]->section}}</h1>
-                <p class="text-lg">Task: {{$assignment[0]->task}}</p>
-                <p class="text-lg">Equation: {{$assignment[0]->equation}}</p>
+                <h1 class="text-xl" style="font-weight: bold">{{$tasks}}  {{$assignment[0]->section}}</h1>
+                <p class="text-lg">{{$tasks}}: {{$assignment[0]->task}}</p>
+                <p class="text-lg">{{$equation}}: <?php echo '\(' . $assignment[0]->equation . '\)'; ?></p>
 
                     <form method="get" action="{{ url('student/submitTask', $assignment[0]->id) }}">
                         <div class="form-group">
@@ -15,20 +43,20 @@
                             <textarea @if($assignment[0]->status==\App\Enums\Status::submitted)
                                         disabled
                                           @endif{{-- Textarea content musi byt v jednom riadku inak to tam hadze whitespaces--}}
-                                      class="form-control form-control-lg" placeholder="Enter text" rows="5" name="answer">@if ($assignment[0]->answer != null){{$assignment[0]->answer}}@endif</textarea>
+                                      class="form-control form-control-lg" placeholder={{$enterT}} rows="5" name="answer">@if ($assignment[0]->answer != null){{$assignment[0]->answer}}@endif</textarea>
                         </div>
 
 
                     <div class="row">
                         <div class="col">
                             @if($assignment[0]->status != \App\Enums\Status::submitted)
-                                <button class="btn btn-dark btn-lg my-3" type="submit">Submit</button>
+                                <button class="btn btn-dark btn-lg my-3" type="submit">{{$sub}}</button>
                             @else
-                                <button class="my-3 btn btn-dark btn-lg" disabled>Task already submitted</button>
+                                <button class="my-3 btn btn-dark btn-lg" disabled>{{$submited}}</button>
                             @endif
                         </div>
                         <div class="col text-right my-3 fs-3">
-                            <p>Points: {{$assignment[0]->points_earned}}/{{$assignment[0]->points}}</p>
+                            <p>{{$points}}: {{$assignment[0]->points_earned}}/{{$assignment[0]->points}}</p>
                         </div>
                     </div>
 
@@ -39,7 +67,7 @@
 
 
             @else{
-        <h2>No task selected</h2>
+        <h2>{{$noTask}}</h2>
                 }
             @endif
 
