@@ -4,8 +4,9 @@
 
 
             @if($assignment!=null)
-                <h1>Task  {{$assignment[0]->section}}</h1>
-                <p class="text-lg">{{$assignment[0]->task}}</p>
+                <h1 class="text-xl" style="font-weight: bold">Task  {{$assignment[0]->section}}</h1>
+                <p class="text-lg">Task: {{$assignment[0]->task}}</p>
+                <p class="text-lg">Equation: {{$assignment[0]->equation}}</p>
 
                     <form method="get" action="{{ url('student/submitTask', $assignment[0]->id) }}">
                         <div class="form-group">
