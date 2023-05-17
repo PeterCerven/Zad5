@@ -7,6 +7,8 @@ if (session('language') == 'english') {
     $en = true;
 }
 if ($en){
+    $name = "Name";
+    $Surname = "Surname";
     $noAssigments = "No Assigments found";
     $task = "Task";
     $equation = "Equation";
@@ -16,6 +18,8 @@ if ($en){
     $answer = "Answer";
     $points = "Points earned";
 } else {
+    $name = "Meno";
+    $Surname = "Priezvisko";
     $noAssigments = "Neboli nájdené žiadne úlohy";
     $task = "Úloha";
     $equation = "Rovnica";
@@ -32,10 +36,12 @@ if ($en){
             <h2>{{$noAssigments}}</h2>
         @else
             <h2>{{$assignments->first()->first_name}} {{$assignments->first()->last_name}}</h2>
-            <table id="tableStudent" class="table display table-striped table-bordered">
+            <table id="tableStudent" class="table display table-striped table-bordered table-condensed">
                 <thead>
                 <tr>
-                    <th>ID</th>
+                    <th class="d-none">ID</th>
+                    <th class="d-none">{{ $name }}</th>
+                    <th class="d-none">{{ $Surname }}</th>
                     <th>{{ $task }}</th>
                     <th>{{ $equation }}</th>
                     <th>{{ $solution }}</th>
@@ -48,12 +54,13 @@ if ($en){
                 <tbody>
                 @foreach($assignments as $assignment)
                     <tr>
-                        <td>{{$assignment->id}}</td>
-                        <td> {{$assignment->first_name}}</td>
-                        <td> {{$assignment->last_name}}</td>
+                        <td class="d-none">{{$assignment->id}}</td>
+                        <td class="d-none"> {{$assignment->first_name}}</td>
+                        <td class="d-none"> {{$assignment->last_name}}</td>
                         <td> {{$assignment->task}}</td>
-                        <td> {{$assignment->equation}}</td>
-                        <td> {{$assignment->solution}}</td>
+                        <td> <?php echo '\(' . $assignment->equation . '\)'; ?></td>
+                        <td> <?php echo '\(' . $assignment->solution . '\)'; ?></td>
+
                         <td> {{$assignment->status}}</td>
                         <td> {{$assignment->verdict}}</td>
                         <td> {{$assignment->answer}}</td>

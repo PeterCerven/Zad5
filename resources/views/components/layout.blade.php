@@ -28,7 +28,10 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
     <!DOCTYPE html>
 <html lang="sk">
 <head>
-
+    <style>
+    .table-condensed{
+    font-size: 13px;
+    }
     </style>
     <meta charset="UTF-8">
 
@@ -165,13 +168,6 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
 </header>
 
 {{$slot}}
-
-<p>
-    Len pre test zobrazenia: <br>
-    Rovnica: <?php echo '\(' . $equationFromDatabase . '\)'; ?>
-    <br>
-    Pociatocne podmienky: <?php echo $initialConditions; ?>
-</p>
 
 <div class="container">
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
