@@ -49,3 +49,6 @@ Route::get('/table', [TeacherController::class, 'table'])
 Route::get('/table/{user}', [TeacherController::class, 'studentTable'])
     ->name('teacher.studentTable')
     ->middleware('is_teacher');
+
+Route::get('student/generateNewTask',[StudentController::class,'generateNewTask'])
+    ->middleware('is_student');
