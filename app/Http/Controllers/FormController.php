@@ -72,7 +72,7 @@ class FormController extends Controller
         $csv->setOutputBOM(Writer::BOM_UTF8); // Nastavenie výstupného jazyka na angličtinu (English)
 
         // Insert headers
-        $csv->insertOne(['id', 'name', 'surname', 'assignment_count', 'total_points']);
+        $csv->insertOne(['id', 'name', 'surname', 'assignment_count', 'assignment_submitted', 'total_points']);
 
         // Vloženie riadkov do CSV
         foreach ($users as $row) {
@@ -81,6 +81,7 @@ class FormController extends Controller
                 $row->name,
                 $row->surname,
                 $row->assignment_count,
+                $row->assignment_submitted,
                 $row->total_points,
 
             ]);

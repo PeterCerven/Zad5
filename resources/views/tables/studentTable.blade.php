@@ -19,6 +19,11 @@ if ($en){
     $answer = "Answer";
     $points = "Points earned";
     $csv = "Get CSV";
+    $show = "Show";
+    $filter = "Search";
+    $norecords = "No records";
+    $records = "from";
+    $showing = "Showing";
 } else {
     $name = "Meno";
     $Surname = "Priezvisko";
@@ -31,6 +36,11 @@ if ($en){
     $answer = "Odpoved";
     $points = "Získané body";
     $csv = "Generuj CSV";
+    $show = "Zobraz";
+    $filter = "Hľadaj";
+    $norecords = "Žiadny záznam";
+    $records = "z";
+    $showing = "Zobrazujem";
 }
 $assignmentsArray = [];
 foreach ($assignments as $assignment) {
@@ -94,6 +104,26 @@ $assignmentsJson = json_encode($assignmentsArray);
                     targets: [5],
                     orderData: [5, 4, 3],
                 },],
+                "language": {
+                    "lengthMenu": "<?php echo $show; ?> _MENU_"
+                },
+                oLanguage:{
+                    "sSearch": "<?php echo $filter; ?>",
+                    "sInfo": "<?php echo $showing; ?> _PAGE_ / _PAGES_",
+                    "sInfoFiltered": " <?php echo $records; ?> _MAX_",
+                    "sInfoEmpty": "<?php echo $norecords; ?>",
+                    "sZeroRecords": "<?php echo $norecords; ?>",
+                    "oPaginate": {
+                        "sFirst": "Prvá",
+                        "sLast": "Posledná",
+                        "sNext": ">>",
+                        "sPrevious": "<<"
+                    }
+                },
+                initComplete: function () {
+                    $('.dataTables_filter input[type="search"]').css({ 'width': '140px', 'display': 'inline-block','margin-left': '10px' });
+                    $('.dataTables_length select').css({'display': 'inline-block','width': '60px','margin-left': '10px', 'margin-right': '10px' });
+                },
                 responsive: true
             });
         });
