@@ -6,17 +6,12 @@ $en = false;
 if (session('language') == 'english') {
     $en = true;
 }
-if ($en){
+if ($en) {
     $name = "Name";
     $Surname = "Surname";
-    $noAssigments = "No Assigments found";
-    $task = "Task";
-    $equation = "Equation";
-    $solution = "Solution";
-    $status = "Status";
-    $verdict = "Verdict";
-    $answer = "Answer";
-    $points = "Points earned";
+    $exercises = "Generated exercises";
+    $submittedExercises = "Submitted exercises";
+    $points = "Earned Points";
     $csv = "Get CSV";
     $show = "Show";
     $filter = "Search";
@@ -26,13 +21,8 @@ if ($en){
 } else {
     $name = "Meno";
     $Surname = "Priezvisko";
-    $noAssigments = "Neboli nájdené žiadne úlohy";
-    $task = "Úloha";
-    $equation = "Rovnica";
-    $solution = "Výsledok";
-    $status = "Stav";
-    $verdict = "Verdikt";
-    $answer = "Odpoved";
+    $exercises = "Generované úlohy";
+    $submittedExercises = "Odoslané úlohy";
     $points = "Získané body";
     $csv = "Generuj CSV";
     $show = "Zobraz";
