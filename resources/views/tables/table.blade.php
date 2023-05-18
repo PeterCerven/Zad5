@@ -11,15 +11,28 @@ if ($en){
     $Surname = "Surname";
     $exercises = "Generated exercises";
     $points = "Earned Points";
-
+    $csv = "Get CSV";
 } else {
     $name = "Meno";
     $Surname = "Priezvisko";
     $exercises = "Generované úlohy";
     $points = "Získané body";
+    $csv = "Generuj CSV";
 }
+$usersArray = [];
+foreach ($users as $user) {
+    $usersArray[] = (array) $user;
+}
+$usersJson = json_encode($usersArray);
 ?>
 <x-layout>
+    <div class="container d-flex justify-content-center align-items-center">
+        <form action="{{ route('generate.main.csv') }}" method="POST">
+            <input type="hidden" name="users" value="{{ $usersJson }}">
+            @csrf
+            <button class="bg-black text-white rounded py-2 px-4 hover:bg-black" type="submit">{{$csv}}</button>
+        </form>
+    </div>
     <div class="container">
         @if($users)
             <table id="table" class="table display table-striped table-bordered">

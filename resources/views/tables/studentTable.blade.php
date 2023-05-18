@@ -1,4 +1,5 @@
 <?php
+
 if (!session()->has('language')) {
     session(['language' => 'english']);
 }
@@ -17,6 +18,7 @@ if ($en){
     $verdict = "Verdict";
     $answer = "Answer";
     $points = "Points earned";
+    $csv = "Get CSV";
 } else {
     $name = "Meno";
     $Surname = "Priezvisko";
@@ -28,7 +30,13 @@ if ($en){
     $verdict = "Verdikt";
     $answer = "Odpoved";
     $points = "Získané body";
+    $csv = "Generuj CSV";
 }
+$assignmentsArray = [];
+foreach ($assignments as $assignment) {
+    $assignmentsArray[] = (array) $assignment;
+}
+$assignmentsJson = json_encode($assignmentsArray);
 ?>
 <x-layout>
     <div class="container">
@@ -42,7 +50,7 @@ if ($en){
                     <th class="d-none">ID</th>
                     <th class="d-none">{{ $name }}</th>
                     <th class="d-none">{{ $Surname }}</th>
-                    <th>{{ $task }}</th>
+                    <th class="maxwidth">{{ $task }}</th>
                     <th>{{ $equation }}</th>
                     <th>{{ $solution }}</th>
                     <th>{{ $status }}</th>
@@ -57,7 +65,7 @@ if ($en){
                         <td class="d-none">{{$assignment->id}}</td>
                         <td class="d-none"> {{$assignment->first_name}}</td>
                         <td class="d-none"> {{$assignment->last_name}}</td>
-                        <td> {{$assignment->task}}</td>
+                        <td class="maxwidth"> {{$assignment->task}}</td>
                         <td> <?php echo '\(' . $assignment->equation . '\)'; ?></td>
                         <td> <?php echo '\(' . $assignment->solution . '\)'; ?></td>
 
@@ -70,10 +78,19 @@ if ($en){
                 </tbody>
             </table>
     </div>
+
+    <div class="container d-flex justify-content-center align-items-center" >
+        <form action="{{ route('generate.csv') }}" method="POST">
+            <input type="hidden" name="assignments" value="{{ $assignmentsJson }}">
+            @csrf
+            <button class="bg-black text-white rounded py-2 px-4 hover:bg-black" type="submit">{{$csv}}</button>
+        </form>
+    </div>
     <script>
         $(document).ready(function () {
             $('#tableStudent').DataTable({
-                columnDefs: [{
+                columnDefs: [
+                    {
                     targets: [5],
                     orderData: [5, 4, 3],
                 },],
