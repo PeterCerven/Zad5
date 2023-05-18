@@ -43,6 +43,7 @@ class TeacherController extends Controller
                 'users.name',
                 'users.surname',
                 DB::raw('COUNT(assignments.id) as assignment_count'),
+                DB::raw('COUNT(CASE WHEN assignments.status = "submitted" THEN assignments.id END) as assignment_submitted'),
                 DB::raw('CAST(COALESCE(SUM(assignments.points_earned), 0) AS SIGNED) as total_points')
             )
             ->where('users.is_teacher', '=', 0)

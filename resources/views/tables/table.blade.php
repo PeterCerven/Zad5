@@ -10,12 +10,14 @@ if ($en){
     $name = "Name";
     $Surname = "Surname";
     $exercises = "Generated exercises";
+    $submittedExercises = "Submitted exercises";
     $points = "Earned Points";
 
 } else {
     $name = "Meno";
     $Surname = "Priezvisko";
     $exercises = "Generované úlohy";
+    $submittedExercises = "Odoslané úlohy";
     $points = "Získané body";
 }
 ?>
@@ -29,6 +31,7 @@ if ($en){
                     <th>{{ $name }}</th>
                     <th>{{ $Surname }}</th>
                     <th>{{ $exercises }}</th>
+                    <th>{{ $submittedExercises }}</th>
                     <th>{{ $points }}</th>
                 </tr>
                 </thead>
@@ -44,6 +47,7 @@ if ($en){
                         </td>
                         <td> {{$user->surname}}</td>
                         <td> {{$user->assignment_count}}</td>
+                        <td> {{$user->assignment_submitted}}</td>
                         <td> {{$user->total_points}}</td>
                     </tr>
                 @endforeach
@@ -59,11 +63,6 @@ if ($en){
                 },],
                 responsive: true
             });
-            // $('#top10_data').DataTable({
-            //     responsive: true,
-            //     paging: false,
-            //     info: false
-            // });
 
 
         });

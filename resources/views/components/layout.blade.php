@@ -52,8 +52,7 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
             crossorigin="anonymous"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.6.0.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-
-    <script src="//unpkg.com/alpinejs" defer></script>
+    {{--tailwind--}}
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Pre zobrazenie rovnic -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -177,7 +176,7 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
                     <use xlink:href="#bootstrap"/>
                 </svg>
             </a>
-            <span class="mb-3 mb-md-0 text-muted">&copy; 2023 Andrej Červeň, Martin Király, Martin Jucha a Peter Bugoš</span>
+            <span class="mb-3 mb-md-0 text-muted">&copy; 2023 Peter Červeň, Andrej Király, Martin Jucha a Peter Bugoš</span>
         </div>
 
         <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
