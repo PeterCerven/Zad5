@@ -6,20 +6,13 @@ $en = false;
 if (session('language') == 'english') {
     $en = true;
 }
-
-
-if ($en){
+if ($en) {
     $name = "Name";
     $Surname = "Surname";
     $exercises = "Generated exercises";
     $submittedExercises = "Submitted exercises";
     $points = "Earned Points";
     $csv = "Get CSV";
-    $show = "Show";
-    $filter = "Search";
-    $norecords = "No records";
-    $records = "from";
-    $showing = "Showing";
 } else {
     $name = "Meno";
     $Surname = "Priezvisko";
@@ -27,15 +20,10 @@ if ($en){
     $submittedExercises = "Odoslané úlohy";
     $points = "Získané body";
     $csv = "Generuj CSV";
-    $show = "Zobraz";
-    $filter = "Hľadaj";
-    $norecords = "Žiadny záznam";
-    $records = "z";
-    $showing = "Zobrazujem";
 }
 $usersArray = [];
 foreach ($users as $user) {
-    $usersArray[] = (array) $user;
+    $usersArray[] = (array)$user;
 }
 $usersJson = json_encode($usersArray);
 ?>
@@ -82,30 +70,20 @@ $usersJson = json_encode($usersArray);
     <script>
         $(document).ready(function () {
             $('#table').DataTable({
-                columnDefs: [{
-                    targets: [5],
-                    orderData: [5, 4, 3],
-                },],
-                "language": {
-                    "lengthMenu": "<?php echo $show; ?> _MENU_"
-                },
-                oLanguage:{
-                    "sSearch": "<?php echo $filter; ?>",
-                    "sInfo": "<?php echo $showing; ?> _PAGE_ / _PAGES_",
-                    "sInfoFiltered": " <?php echo $records; ?> _MAX_",
-                    "sInfoEmpty": "<?php echo $norecords; ?>",
-                    "sZeroRecords": "<?php echo $norecords; ?>",
-                    "oPaginate": {
-                        "sFirst": "Prvá",
-                        "sLast": "Posledná",
-                        "sNext": ">>",
-                        "sPrevious": "<<"
-                    }
-                },
-                initComplete: function () {
-                    $('.dataTables_filter input[type="search"]').css({ 'width': '140px', 'display': 'inline-block','margin-left': '10px' });
-                    $('.dataTables_length select').css({'display': 'inline-block','width': '60px','margin-left': '10px', 'margin-right': '10px' });
-                },
+                columnDefs: [
+                    {
+                        targets: [5],
+                        orderData: [5, 2],
+                    },
+                    {
+                        targets: [4],
+                        orderData: [4, 2],
+                    },
+                    {
+                        targets: [3],
+                        orderData: [3, 2],
+                    },
+                ],
                 responsive: true
             });
 
