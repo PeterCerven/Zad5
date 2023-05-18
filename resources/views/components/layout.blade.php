@@ -30,7 +30,10 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
 <head>
     <style>
     .table-condensed{
-    font-size: 13px;
+    font-size: 14px;
+    }
+    .maxwidth{
+        max-width: 250px !important;
     }
     </style>
     <meta charset="UTF-8">
@@ -52,7 +55,9 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
             crossorigin="anonymous"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.6.0.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-    {{--tailwind--}}
+
+
+    <script src="//unpkg.com/alpinejs" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Pre zobrazenie rovnic -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
