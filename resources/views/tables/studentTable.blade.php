@@ -128,5 +128,6 @@ $assignmentsJson = json_encode($assignmentsArray);
             });
         });
     </script>
+
     @endif
 </x-layout>
