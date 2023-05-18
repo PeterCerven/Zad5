@@ -6,7 +6,7 @@ $en = false;
 if (session('language') == 'english') {
     $en = true;
 }
-if ($en){
+if ($en) {
     $name = "Name";
     $Surname = "Surname";
     $exercises = "Generated exercises";
@@ -23,7 +23,7 @@ if ($en){
 }
 $usersArray = [];
 foreach ($users as $user) {
-    $usersArray[] = (array) $user;
+    $usersArray[] = (array)$user;
 }
 $usersJson = json_encode($usersArray);
 ?>
@@ -70,10 +70,20 @@ $usersJson = json_encode($usersArray);
     <script>
         $(document).ready(function () {
             $('#table').DataTable({
-                columnDefs: [{
-                    targets: [5],
-                    orderData: [5, 4, 3],
-                },],
+                columnDefs: [
+                    {
+                        targets: [5],
+                        orderData: [5, 2],
+                    },
+                    {
+                        targets: [4],
+                        orderData: [4, 2],
+                    },
+                    {
+                        targets: [3],
+                        orderData: [3, 2],
+                    },
+                ],
                 responsive: true
             });
 
