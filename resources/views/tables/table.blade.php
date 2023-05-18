@@ -18,6 +18,7 @@ if ($en) {
     $norecords = "No records";
     $records = "from";
     $showing = "Showing";
+    $exercises = "Exercises";
 } else {
     $name = "Meno";
     $Surname = "Priezvisko";
@@ -30,6 +31,7 @@ if ($en) {
     $norecords = "Žiadny záznam";
     $records = "z";
     $showing = "Zobrazujem";
+    $exercises = "Úlohy";
 }
 $usersArray = [];
 foreach ($users as $user) {

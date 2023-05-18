@@ -24,6 +24,7 @@ if ($en){
     $norecords = "No records";
     $records = "from";
     $showing = "Showing";
+    $back = "Back";
 } else {
     $name = "Meno";
     $Surname = "Priezvisko";
@@ -36,6 +37,7 @@ if ($en){
     $answer = "Odpoved";
     $points = "Získané body";
     $csv = "Generuj CSV";
+    $back = "Späť";
     $show = "Zobraz";
     $filter = "Hľadaj";
     $norecords = "Žiadny záznam";
@@ -54,7 +56,7 @@ $assignmentsJson = json_encode($assignmentsArray);
             <h2>{{$noAssigments}}</h2>
         @else
             <h2>{{$assignments->first()->first_name}} {{$assignments->first()->last_name}}</h2>
-            <table id="tableStudent" class="table display table-striped table-bordered table-condensed">
+            <table id="tableStudent" class="table display table-striped table-bordered table-condensed" style="margin: 10px">
                 <thead>
                 <tr>
                     <th class="d-none">ID</th>
@@ -89,7 +91,10 @@ $assignmentsJson = json_encode($assignmentsArray);
             </table>
     </div>
 
-    <div class="container d-flex justify-content-center align-items-center" >
+    <div class="container d-flex justify-content-around align-items-center" >
+        <button class="bg-black text-white rounded py-2 px-4 hover:bg-black" type="button">
+            <a href="{{ route('teacher.table') }}">{{$back}}</a>
+        </button>
         <form action="{{ route('generate.csv') }}" method="POST">
             <input type="hidden" name="assignments" value="{{ $assignmentsJson }}">
             @csrf
@@ -128,6 +133,5 @@ $assignmentsJson = json_encode($assignmentsArray);
             });
         });
     </script>
-
     @endif
 </x-layout>

@@ -91,6 +91,7 @@ class StudentController extends Controller
                     'latex.task',
                     'latex.equation',
                     'latex.solution',
+                    'latex.image_name',
                 )
                 ->where('assignments.user_id', $studentId)
                 ->get()
@@ -117,6 +118,7 @@ class StudentController extends Controller
                     'latex.task',
                     'latex.equation',
                     'latex.solution',
+                    'latex.image_name',
                 )
                 ->where('assignments.user_id', $studentId)
                 ->where('assignments.id', $assignment_id)
