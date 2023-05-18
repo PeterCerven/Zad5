@@ -56,14 +56,33 @@ class DBController extends Controller
     }
     static private function processSection($name, $sectionTitle, $sectionContent) {
         $section = $sectionTitle;
+
         // Získanie  textu úlohy
-        $pattern_text = '/\\\begin\{task}\s*(.*?)\\\begin\{equation\*}/s';
+        $pattern_text = '/\\\begin\{task}\s*(.*?)\\\end\{task}/s';
+        //$pattern_text = '/\\\begin\{task}\s*(.*?)\\\end\{task}/s';
         preg_match($pattern_text, $sectionContent, $matches);
         $task = trim($matches[1]);
+        $substring = '\includegraphics';
+        $position = strpos($task, $substring);
+        if ($position !== false) {
+            trim($task = substr($task, 0, $position));
+        }
+        $substring = '\begin';
+        $position = strpos($task, $substring);
+        if ($position !== false) {
+            trim($task = substr($task, 0, $position));
+        }
+        $substring = '\\\\';
+        $position = strpos($task, $substring);
+        if ($position !== false) {
+            trim($task = substr($task, 0, $position));
+        }
+
         // Regulárny výraz pre získanie rovnice
         $pattern_rovnica = '/\\\begin\{equation\*}(.+?)\\\end\{equation\*}/s';
         preg_match($pattern_rovnica, $sectionContent, $matches);
         $equation = trim($matches[1]);
+
         $pattern_pokec = '/\\\end{equation\*}(.+?)\\\/s';
         preg_match($pattern_pokec, $sectionContent, $matches);
         if (count($matches) > 0) {
@@ -71,10 +90,13 @@ class DBController extends Controller
         } else {
             $eq_text = '';
         }
+
         $pattern_res = '/\\\begin{solution}\s*\\\begin{equation\*}\s*(.+?)\\\end{equation\*}\s*\\\end{solution}/s';
         preg_match($pattern_res, $sectionContent, $matches);
         $solution = trim($matches[1]);
-
+        if ($solution==$equation){
+            $equation =  '';
+        }
         // Regulárny výraz pre získanie informácie o začiatočných podmienkach
         $pattern_vztah = '/\\\end\{equation\*}(.*?)\\\end\{task}/s';
         // Získanie informácií o začiatočných podmienkach
@@ -103,6 +125,7 @@ class DBController extends Controller
         } else {
             $image_name = '';
         }
+
         $latexData = new LatexData($name,$section, $task, $equation, $eq_text, $solution, $eq_conditions, $image_name);
         DBController::insertLatexData($latexData);
     }
