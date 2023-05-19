@@ -163,7 +163,7 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
                         {{$welcome." ".auth()->user()->name}}
                     </span>
                         </li>
-                        <li>
+                        <li class="container">
                             <a href="{{ url()->previous() }}" class="hover:text-laravel" style="color: white">
                                 <i class="fa-solid fa-arrow-left" style="color: white"></i>
                                 <?php if ($en) {

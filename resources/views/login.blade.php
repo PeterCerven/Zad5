@@ -9,17 +9,20 @@ if (session('language') == 'english') {
 if ($en){
     $login = "Log in";
     $logAccout = "Log into your account";
-    $email = "Email";
-    $password = "Password";
+    $email = "Email:";
+    $password = "Password:";
     $signin = "Sign in";
 } else {
     $login = "Prihlásenie";
     $logAccout = "Prihlás sa do konta";
-    $email = "Email";
-    $password = "Hesla";
+    $email = "Email:";
+    $password = "Hesla:";
     $signin = "Prihlás";
 }
 ?>
+<style>
+</style>
+
 <x-layout>
     <x-card class="p-10 max-w-lg mx-auto mt-24">
         <header class="text-center">
@@ -31,7 +34,7 @@ if ($en){
 
         <form method="POST" action="/users/authenticate">
             @csrf
-            <div class="mb-6">
+            <div class="mb-6 font-bold">
                 <label for="email" class="inline-block text-lg mb-2">{{$email}}</label>
                 <input
                     type="email"
@@ -45,7 +48,7 @@ if ($en){
                 @enderror
             </div>
 
-            <div class="mb-6">
+            <div class="mb-6 font-bold">
                 <label
                     for="password"
                     class="inline-block text-lg mb-2">
