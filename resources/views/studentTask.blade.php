@@ -29,7 +29,11 @@ if ($en){
 <x-layout>
     <div class="container mt-5">
         <div class="align-items-center justify-content-center">
-
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.js"></script>
+            <script>
+                // Your Math.js code here
+                // You can use the Math.js library functions and methods in this script block
+            </script>
 
             @if($assignment!=null)
                 <h1 class="text-xl" style="font-weight: bold">{{$tasks}}  {{$assignment[0]->section}}</h1>

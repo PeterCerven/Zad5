@@ -151,6 +151,18 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
                             {{$action}}</a>
                     </li>
                     <li>
+                        <a href="{{ url()->previous() }}" class="hover:text-laravel">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            <?php if ($en) {
+                                echo "
+                            Back";
+                            } else {
+                                echo "Späť";
+                            } ?>
+                        </a>
+                    </li>
+
+                    <li>
                         <form class="inline" method="POST" action="/logout">
                             @csrf
                             <button type="submit" class="hover:text-laravel">

@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\LatexData;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use node_modules\mathjs\dist\math;
+
 
 class StudentController extends Controller
 {
@@ -175,6 +177,5 @@ class StudentController extends Controller
                 ]);
 
             return redirect()->back()->with('message', 'Úloha bola odoslaná.');
-
         }
 }
