@@ -29,12 +29,27 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
 <html lang="sk">
 <head>
     <style>
-    .table-condensed{
-    font-size: 14px;
-    }
-    .maxwidth{
-        max-width: 250px !important;
-    }
+        .table-condensed{
+            font-size: 14px;
+        }
+        .maxwidth{
+            max-width: 250px !important;
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 3rem;
+            background-color: #0a4275;
+            box-shadow:1px 1px 10px rgba(0,0,0,0.5);
+        }
+        .copyright {
+            color: white;
+            text-align: center;
+            font-size: medium;
+            margin-top: 12px;
+            text-shadow: 2px 2px 5px #000000;
+        }
     </style>
     <meta charset="UTF-8">
 
@@ -105,14 +120,14 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
 </svg>
 <header>
     <!-- navigator -->
-    <div class="container">
-        <nav class="navbar navbar-expand-sm navbar-dark bg-primary" aria-label="Mynavigator">
-            <a class="navbar-brand" href="/"><?php if ($en) {
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0a4275; box-shadow:1px 1px 10px rgba(0,0,0,0.5);" aria-label="Mynavigator">
+        <div class="container">
+            <a class="navbar-brand font-bold" href="/"><?php if ($en) {
                     echo "Navigation";
                 } else {
                     echo "Navigácia";
                 } ?></a>
-            <div class="position-absolute end-0">
+            <div class="position-absolute end-10">
                 <?php if (session('language') == "english"){ ?>
                 <form action="{{ route('form.process') }}" method="post">
                     @csrf
@@ -122,6 +137,7 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
                     <button type="submit" class="flag bg-primary" data-lang="sk"><img
                             src="{{ asset('pics/sk_flag.png') }}" alt="Slovak" width="30" height="15"></button>
                 </form>
+
                 <?php } ?>
                 <?php if (session('language') == "slovak"){ ?>
                 <form action="{{ route('form.process') }}" method="post">
@@ -138,74 +154,55 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
                 </form>
                 <?php } ?>
             </div>
-            <ul>
-                @auth
-                    <li>
-                    <span class="font-bold uppercase">
+
+            <div class="container">
+                <ul>
+                    @auth
+                        <li>
+                    <span class="font-bold uppercase" style="color: white">
                         {{$welcome." ".auth()->user()->name}}
                     </span>
-                    </li>
-                    <li>
-                        <a href="#" class="hover:text-laravel">
-                            <i class="fa-solid fa-gear"></i>
-                            {{$action}}</a>
-                    </li>
-                    <li>
-                        <a href="{{ url()->previous() }}" class="hover:text-laravel">
-                            <i class="fa-solid fa-arrow-left"></i>
-                            <?php if ($en) {
-                                echo "
+                        </li>
+                        <li>
+                            <a href="{{ url()->previous() }}" class="hover:text-laravel" style="color: white">
+                                <i class="fa-solid fa-arrow-left" style="color: white"></i>
+                                <?php if ($en) {
+                                    echo "
                             Back";
-                            } else {
-                                echo "Späť";
-                            } ?>
-                        </a>
-                    </li>
-
-                    <li>
-                        <form class="inline" method="POST" action="/logout">
-                            @csrf
-                            <button type="submit" class="hover:text-laravel">
-                                <i class="fa-solid fa-door-closed" style="color: black"></i>
-                                {{$logout}}
-                            </button>
-                        </form>
-                    </li>
-                @else
-                    <li>
-                        <a href="/login" class="hover:text-laravel" style="color: black">
-                            <i class="fa-solid fa-arrow-right-to-bracket" style="color: black"></i>
-                            {{$login}}</a>
-                    </li>
-                @endauth
-            </ul>
-        </nav>
-    </div>
+                                } else {
+                                    echo "Späť";
+                                } ?>
+                            </a>
+                        </li>
+                        <li>
+                            <form class="inline" method="POST" action="/logout" style="color: white">
+                                @csrf
+                                <button type="submit" class="hover:text-laravel">
+                                    <i class="fa-solid fa-door-closed" style="color: white"></i>
+                                    {{$logout}}
+                                </button>
+                            </form>
+                        </li>
+                    @else
+                        <li>
+                            <a href="/login" class="hover:text-laravel" style="color: white">
+                                <i class="fa-solid fa-arrow-right-to-bracket" style="color: white"></i>
+                                {{$login}}</a>
+                        </li>
+                    @endauth
+                </ul>
+            </div>
+        </div>
+    </nav>
     <!-- koniec navigatora -->
 </header>
 
 {{$slot}}
 
-<div class="container">
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <div class="col-md-4 d-flex align-items-center">
-            <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                <svg class="bi" width="30" height="24">
-                    <use xlink:href="#bootstrap"/>
-                </svg>
-            </a>
-            <span class="mb-3 mb-md-0 text-muted">&copy; 2023 Peter Červeň, Andrej Király, Martin Jucha a Martin Bugoš</span>
-        </div>
+<footer class="footer mt-auto">
+    <p class="copyright">&copy; 2023 Peter Červeň, Andrej Király, Martin Jucha a Martin Bugoš</p>
+</footer>
 
-        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-            <li class="ms-3"><a class="text-muted" href="#">
-                    <svg class="bi" width="24" height="24">
-                        <use xlink:href="#facebook"/>
-                    </svg>
-                </a></li>
-        </ul>
-    </footer>
-</div>
 <!-- koniec pety -->
 <script type="text/javascript">
 
