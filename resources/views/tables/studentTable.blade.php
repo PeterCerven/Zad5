@@ -44,6 +44,8 @@ if ($en){
     $records = "z";
     $showing = "Zobrazujem";
 }
+
+$table = implode(";", array("ID",$name,$Surname, $task, $equation, $solution , $status,$verdict,$answer,$points));
 $assignmentsArray = [];
 foreach ($assignments as $assignment) {
     $assignmentsArray[] = (array) $assignment;
@@ -97,6 +99,7 @@ $assignmentsJson = json_encode($assignmentsArray);
         </button>
         <form action="{{ route('generate.csv') }}" method="POST">
             <input type="hidden" name="assignments" value="{{ $assignmentsJson }}">
+            <input type="hidden" name="table" value="{{ $table }}">
             @csrf
             <button class="bg-black text-white rounded py-2 px-4 hover:bg-black" type="submit">{{$csv}}</button>
         </form>

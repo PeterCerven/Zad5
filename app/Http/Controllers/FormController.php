@@ -27,6 +27,8 @@ class FormController extends Controller
     {
         $assignmentsJson = $request->input('assignments');
         $assignments = json_decode($assignmentsJson);
+        $table = $request->input('table');
+        $tablearray= explode(";", $table);
         $csv = Writer::createFromFileObject(new \SplTempFileObject());
         // Nastavenie oddelovača stĺpcov
         try {
@@ -36,7 +38,8 @@ class FormController extends Controller
         $csv->setOutputBOM(Writer::BOM_UTF8); // Nastavenie výstupného jazyka na angličtinu (English)
 
         // Insert headers
-        $csv->insertOne(['id', 'first_name', 'last_name', 'task', 'equation', 'solution', 'status', 'verdict', 'answer', 'points_earned']);
+        //$csv->insertOne(['id', 'first_name', 'last_name', 'task', 'equation', 'solution', 'status', 'verdict', 'answer', 'points_earned']);
+        $csv->insertOne($tablearray);
         // Vloženie riadkov do CSV
         foreach ($assignments as $row) {
             $csv->insertOne([
@@ -62,6 +65,8 @@ class FormController extends Controller
     public function generateMainCSV(Request $request)
     {
         $usersJson = $request->input('users');
+        $table = $request->input('table');
+        $tablearray= explode(";", $table);
         $users = json_decode($usersJson);
         $csv = Writer::createFromFileObject(new \SplTempFileObject());
         // Nastavenie oddelovača stĺpcov
@@ -70,9 +75,10 @@ class FormController extends Controller
         } catch (InvalidArgument $e) {
         }
         $csv->setOutputBOM(Writer::BOM_UTF8); // Nastavenie výstupného jazyka na angličtinu (English)
-
         // Insert headers
-        $csv->insertOne(['id', 'name', 'surname', 'assignment_count', 'assignment_submitted', 'total_points']);
+        //$csv->insertOne(['id', 'name', 'surname', 'assignment_count', 'assignment_submitted', 'total_points']);
+        $csv->insertOne($tablearray);
+
 
         // Vloženie riadkov do CSV
         foreach ($users as $row) {

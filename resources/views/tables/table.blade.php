@@ -33,6 +33,10 @@ if ($en) {
     $showing = "Zobrazujem";
     $exercises = "Úlohy";
 }
+
+
+$table = implode(";", array("ID",$name,$Surname, $exercises, $submittedExercises, $points));
+
 $usersArray = [];
 foreach ($users as $user) {
     $usersArray[] = (array)$user;
@@ -43,6 +47,7 @@ $usersJson = json_encode($usersArray);
     <div class="container d-flex justify-content-center align-items-center">
         <form action="{{ route('generate.main.csv') }}" method="POST">
             <input type="hidden" name="users" value="{{ $usersJson }}">
+            <input type="hidden" name="table" value="{{ $table }}">
             @csrf
             <button class="bg-black text-white rounded py-2 px-4 hover:bg-black" type="submit">{{$csv}}</button>
         </form>
