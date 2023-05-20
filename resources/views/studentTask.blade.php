@@ -36,9 +36,20 @@ if ($en){
             </script>
 
             @if($assignment!=null)
-                <h1 class="text-xl" style="font-weight: bold">{{$tasks}}  {{$assignment[0]->section}}</h1>
-                <p class="text-lg">{{$tasks}}: {{$assignment[0]->task}}</p>
-                <p class="text-lg">{{$equation}}: <?php echo '\(' . $assignment[0]->equation . '\)'; ?></p>
+                <div class="container">
+                    <div class="row row-cols-2">
+                        <div class="col">
+                            <h1 class="text-xl" style="font-weight: bold">{{$tasks}}  {{$assignment[0]->section}}</h1>
+                            <p class="text-lg">{{$tasks}}: {{$assignment[0]->task}}</p>
+                            <p class="text-lg">{{$equation}}: <?php echo '\(' . $assignment[0]->equation . '\)'; ?></p>
+                        </div>
+                        <div class="col">
+                            @if ($assignment[0]->image_name!='')
+                                <img src="{{ asset('latex/images/'.$assignment[0]->image_name) }}" alt="Image">
+                            @endif
+                        </div>
+                    </div>
+                </div>
 
                     <form method="get" action="{{ url('student/submitTask', $assignment[0]->id) }}">
                         <div class="form-group">
