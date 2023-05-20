@@ -21,10 +21,17 @@ if ($en){
 }
 ?>
 <style>
-</style>
+    button {
+        background-color: #0a4275;
+        box-shadow:1px 1px 10px rgba(0,0,0,0.5);
+    }
 
+    button:hover {
+        background-color: #3d81c5;
+    }
+</style>
 <x-layout>
-    <x-card class="p-10 max-w-lg mx-auto mt-24">
+    <x-card class="p-10 max-w-lg mx-auto mt-24" style="box-shadow:1px 1px 10px rgba(0,0,0,0.5);">
         <header class="text-center">
             <h2 class="text-2xl font-bold uppercase mb-1">
                 {{ $login }}
@@ -64,10 +71,10 @@ if ($en){
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror
             </div>
-            <div class="mb-6">
+            <div class="mb-6 d-flex justify-content-center">
                 <button
                     type="submit"
-                    class="bg-black text-white rounded py-2 px-4 hover:bg-black">
+                    class="text-white rounded py-2 px-4" style="background-color: #0a4275; box-shadow:1px 1px 10px rgba(0,0,0,0.5);">
                     {{$signin}}
                 </button>
             </div>

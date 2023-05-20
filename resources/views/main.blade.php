@@ -15,23 +15,30 @@ if ($en){
     $toStudentPage = "Choď na stránku žiaka";
 }
 ?>
+<style>
+    .button-blue {
+        background-color: #0a4275;
+        box-shadow:1px 1px 10px rgba(0,0,0,0.5);
+    }
 
-
+    .button-blue:hover {
+        background-color: #3d81c5;
+    }
+</style>
 <x-layout>
-    <div class="container mt-5">
+    <div class="container mt-20">
         <div class="d-flex align-items-center justify-content-center">
-            <div class="mb-6">
-                <a href="/teacher" class="bg-black text-white rounded py-2 px-4 hover:bg-black">
+            <div class="mb-6 me-3">
+                <a href="/teacher" class="text-white rounded py-2 px-4 button-blue">
                     {{ $toTeacherPage }}
                 </a>
             </div>
             <div class="mb-6">
-                <a href="/student" class="bg-black text-white rounded py-2 px-4 hover:bg-black">
+                <a href="/student" class="text-white rounded py-2 px-4 button-blue">
                     {{ $toStudentPage }}
                 </a>
             </div>
         </div>
     </div>
-
 </x-layout>
 

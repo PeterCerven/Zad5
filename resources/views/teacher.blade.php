@@ -25,16 +25,27 @@ if ($en){
     $seeTable = "Pozri tabuľku";
 }
 ?>
+<style>
+    .button-blue {
+        background-color: #0a4275;
+        box-shadow:1px 1px 10px rgba(0,0,0,0.5);
+    }
+
+    .button-blue:hover {
+        background-color: #3d81c5;
+    }
+</style>
+
 <x-layout>
-    <div class="container">
+    <div class="container mt-10">
         @if(count($files) == 0)
             <h2>{{$noFiles}}</h2>
         @else
             <div class="row">
                 @foreach($files as $file)
                     <div class="col-md-3 mb-4">
-                        <x-card>
-                            <header class="text-center">
+                        <x-card style="box-shadow:1px 1px 10px rgba(0,0,0,0.5);">
+                            <header class="text-center" >
                                 <h2 class="text-2xl font-bold uppercase mb-1">
                                     {{$file->name}}
                                 </h2>
@@ -94,10 +105,10 @@ if ($en){
                                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                     @enderror
                                 </div>
-                                <div class="mb-6">
+                                <div class="mb-6 d-flex justify-content-center">
                                     <button
                                         type="submit"
-                                        class="bg-black text-white rounded py-2 px-4 hover:bg-black">
+                                        class="text-white rounded py-2 px-4 button-blue" style="background-color: #0a4275;">
                                         {{ $edit }}
                                     </button>
                                 </div>
@@ -107,10 +118,10 @@ if ($en){
                 @endforeach
             </div>
         @endif
-            <div class="mb-6">
-                <a href="{{route('teacher.table')}}" class="bg-black text-white rounded py-2 px-4 hover:bg-black">
-                    {{ $seeTable }}
-                </a>
-            </div>
+        <div class="mb-6">
+            <a href="{{route('teacher.table')}}" class="text-white rounded py-2 px-4 button-blue">
+                {{ $seeTable }}
+            </a>
+        </div>
     </div>
 </x-layout>

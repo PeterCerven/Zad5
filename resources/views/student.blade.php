@@ -23,11 +23,11 @@ if ($en){
 }
 ?>
 <x-layout>
-    <div class="container mt-5">
+    <div class="container mt-20">
         <div class="d-flex align-items-center justify-content-center">
             <form method="get" action="/student/generateNewTask">
                 <button
-                    class="btn btn-success"
+                    class="text-white rounded py-2 px-4 me-3" style="background-color: #0a4275; box-shadow:1px 1px 10px rgba(0,0,0,0.5);"
                     type="submit">
                     {{$set}}
                 </button>
@@ -35,7 +35,7 @@ if ($en){
             </form>
             <form method="get" action="/student/showTasks">
                 <button
-                    class="btn btn-success"
+                    class="text-white rounded py-2 px-4" style="background-color: #0a4275; box-shadow:1px 1px 10px rgba(0,0,0,0.5);"
                     type="submit">
                     {{$show}}
                 </button>
