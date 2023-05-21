@@ -50,6 +50,8 @@ Route::get('/table/{user}', [TeacherController::class, 'studentTable'])
     ->name('teacher.studentTable')
     ->middleware('is_teacher');
 
+
+//TODO: zmenit niektore metody na post
 Route::get('student/generateNewTask',[StudentController::class,'generateNewTask'])
     ->middleware('is_student');
 Route::get('student/showTasks',[StudentController::class,'showTasks'])

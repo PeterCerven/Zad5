@@ -14,7 +14,7 @@ if ($en){
     $sub = "Submit";
     $submited = "Task already submitted";
     $noTask = "No task selected";
-    $enterT = "Enter_text";
+    $enterT = "Anwer";
 } else {
     $tasks = "Úloha";
     $equation = "Rovnica";
@@ -23,16 +23,43 @@ if ($en){
     $sub = "Predložiť";
     $submited = "Úloha už predložená";
     $noTask = "Žiadna selekovaná úloha";
-    $enterT = "Zadaj_text";
+    $enterT = "Odpoveď";
 }
+
+//<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+//<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.js"></script>
+//
+//<link rel="stylesheet" href="/resources/mathquill-0.10.1/mathquill-basic.css">
+//<script src="/resources/mathquill-0.10.1/mathquill.min.js"></script>
+//<script src="/resources/mathquill-0.10.1/mathquill-basic.js"></script>
+ //           <script src="/resources/mathquill-0.10.1/mathquill.test.js"></script>
+//
 ?>
+
+
 <x-layout>
     <div class="container mt-5">
         <div class="align-items-center justify-content-center">
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.js"></script>
+
+
+
             <script>
-                // Your Math.js code here
-                // You can use the Math.js library functions and methods in this script block
+                window.addEventListener('DOMContentLoaded', () => {
+                    var mathFieldSpan = document.getElementById('math-field');
+                    var latexSpan = document.getElementById('latex');
+                    var latexInput = document.getElementById('latex-input');
+
+                    var MQ = MathQuill.getInterface(2); // for backcompat
+                    var mathField = MQ.MathField(mathFieldSpan, {
+                        spaceBehavesLikeTab: true, // configurable
+                        handlers: {
+                            edit: function() { // useful event handlers
+                                latexSpan.textContent = mathField.latex(); // simple API
+                                latexInput.value = mathField.latex(); // simple API
+                            }
+                        }
+                    });
+                });
             </script>
 
             @if($assignment!=null)
@@ -51,14 +78,23 @@ if ($en){
                     </div>
                 </div>
 
-                    <form method="get" action="{{ url('student/submitTask', $assignment[0]->id) }}">
+
                         <div class="form-group">
+                            <form method="get" action="{{ url('student/submitTask', $assignment[0]->id) }}">
+                            <p>LaTeX of what you typed: <span id="latex"></span></p>
+                                <input type="text" hidden="hidden" id="latex-input" name="answer">
+
+                            @if($assignment[0]->status==\App\Enums\Status::taken)
+                                    <span style="width: 600px; height: 100px; font-size: 25px" id="math-field"></span>
+                            @else
+                                <textarea disabled rows="5" class="form-control form-control-lg" placeholder={{$enterT}}   >@if ($assignment[0]->answer != null){{$assignment[0]->answer}}@endif</textarea>
+                            @endif{{-- Textarea content musi byt v jednom riadku inak to tam hadze whitespaces--}}
 
 
-                            <textarea @if($assignment[0]->status==\App\Enums\Status::submitted)
-                                        disabled
-                                          @endif{{-- Textarea content musi byt v jednom riadku inak to tam hadze whitespaces--}}
-                                      class="form-control form-control-lg" placeholder={{$enterT}} rows="5" name="answer">@if ($assignment[0]->answer != null){{$assignment[0]->answer}}@endif</textarea>
+
+
+
+
                         </div>
 
 
@@ -101,4 +137,6 @@ if ($en){
 
         </div>
     </div>
+
+
 </x-layout>
