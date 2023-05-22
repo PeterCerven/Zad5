@@ -143,6 +143,14 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.js"></script>
 
+    <link rel="stylesheet" href="/public/math/mathquill.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="/public/math/mathquill.js"></script>
+    <script>
+        var MQ = MathQuill.getInterface(2);
+    </script>
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
@@ -291,18 +299,22 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
                         {{$welcome." ".auth()->user()->name}}
                     </span>
                         </li>
-                        <li>
-                            <a href="/guideStudent" class="hover:text-laravel" style="text-decoration: none; color: white;">
-                                <i class="fa-solid fa-question" style="color: white"></i>
-                                {{ $en ? "Guide" : "Návod" }}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/guideTeacher" class="hover:text-laravel" style="text-decoration: none; color: white;">
-                                <i class="fa-solid fa-question" style="color: white"></i>
-                                {{ $en ? "Guide" : "Návod" }}
-                            </a>
-                        </li>
+
+                        @if(!Auth::user()->is_teacher)
+                            <li>
+                                <a href="/guideStudent" class="hover:text-laravel" style="text-decoration: none; color: white;">
+                                    <i class="fa-solid fa-question" style="color: white"></i>
+                                    {{ $en ? "Guide" : "Návod" }}
+                                </a>
+                            </li>
+                        @elseif(Auth::user()->is_teacher)
+                            <li>
+                                <a href="/guideTeacher" class="hover:text-laravel" style="text-decoration: none; color: white;">
+                                    <i class="fa-solid fa-question" style="color: white"></i>
+                                    {{ $en ? "Guide" : "Návod" }}
+                                </a>
+                            </li>
+                        @endif
                         <li>
                             <form class="inline" method="POST" action="/logout" style="color: white">
                                 @csrf
