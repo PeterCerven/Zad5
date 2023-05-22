@@ -52,8 +52,6 @@ if ($en){
                         {{'No more assignments available' }}
                     </div>
                 @endif
-
-
             @endif
         </div>
         <div class="d-flex align-items-center justify-content-center mt-10">

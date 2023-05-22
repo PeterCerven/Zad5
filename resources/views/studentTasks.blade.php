@@ -78,7 +78,16 @@ if ($en){
                             <td>{{ $assignment->points_earned}}</td>
                             <td>{{ $assignment->from }}</td>
                             <td>{{ $assignment->to }}</td>
-                            <td>{{ $assignment->status }}</td>
+                            @if($section =='Sekcia')
+                                @if( $assignment->status  == 'taken')
+                                    <td>{{'Neodovzdané'}}</td>
+                                @elseif( $assignment->status  == 'submitted')
+                                    <td>{{'Odovzdané'}}</td>
+                                @endif
+                            @else
+                                <td>{{ $assignment->status }}</td>
+                            @endif
+
                             <td>
                                 <form method="get" action="{{ url('student/showTask', $assignment->id) }}">
                                     <button class="button-blue text-white rounded py-1 px-2" type="submit">{{$oAssigments}}</button>
