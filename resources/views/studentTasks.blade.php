@@ -9,7 +9,7 @@ if (session('language') == 'english') {
 if ($en){
     $aTasks = "Assigned tasks";
     $mPoints = "Max. Points";
-    $noAssigments = "No Assigments found";
+    $noAssigments = "No assignments found";
     $points = "Given points";
     $from = "From";
     $to = "To";
@@ -17,7 +17,7 @@ if ($en){
     $status = "Status";
     $stassignments = "Assignment";
     $section = "Section";
-    $oAssigments = "Open assigment";
+    $oAssigments = "Open assignment";
 } else {
     $aTasks = "Pridelené úlohy";
     $mPoints = "Max. bodov";
@@ -25,13 +25,23 @@ if ($en){
     $points = "Body";
     $from = "Od";
     $to = "Do";
-    $answer = "Odpoved";
+    $answer = "Odpoveď";
     $status = "Stav";
     $stassignments = "Pridelenie";
     $section = "Sekcia";
-    $oAssigments = "Otvor pridelenie";
+    $oAssigments = "Otvoriť úlohu";
 }
 ?>
+<style>
+    .button-blue {
+        background-color: #0a4275 !important;
+        box-shadow:1px 1px 10px rgba(0,0,0,0.5);
+        transition: 0.4s ease;
+    }
+    .button-blue:hover {
+        background-color: #2576C2 !important;
+    }
+</style>
 <x-layout>
     <div class="container mt-5">
         <div class="align-items-center justify-content-center">
@@ -45,8 +55,8 @@ if ($en){
                 @endif
 
             @else
-                <h1>{{$aTasks}}</h1>
-                <table class="table table-bordered">
+                <h1><strong>{{$aTasks}}</strong></h1>
+                <table class="table table-bordered mt-3">
                     <thead>
                     <tr>
                         <th scope="col">{{$mPoints}}</th>
@@ -65,32 +75,21 @@ if ($en){
                             <td>{{ $assignment->points }}</td>
                             <td>{{ $assignment->section }}</td>
                             <td>{{ $assignment->task }}</td>
-                            <td>{{$assignment->points_earned}}</td>
+                            <td>{{ $assignment->points_earned}}</td>
                             <td>{{ $assignment->from }}</td>
                             <td>{{ $assignment->to }}</td>
                             <td>{{ $assignment->status }}</td>
                             <td>
                                 <form method="get" action="{{ url('student/showTask', $assignment->id) }}">
-                                    <button type="submit">{{$oAssigments}}</button>
+                                    <button class="button-blue text-white rounded py-1 px-2" type="submit">{{$oAssigments}}</button>
                                 </form>
 
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
-
-
-
-
+                </table>
             @endif
-
-
-
-
-
-        </div>
-        <div class="side">
-
         </div>
     </div>
 </x-layout>

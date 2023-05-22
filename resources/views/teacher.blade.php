@@ -21,21 +21,20 @@ if ($en){
     $from = "Od";
     $to = "Do";
     $point = "Body";
-    $edit = "Edituj";
+    $edit = "Upraviť";
     $seeTable = "Pozri tabuľku";
 }
 ?>
 <style>
     .button-blue {
-        background-color: #0a4275;
+        background-color: #0a4275 !important;
         box-shadow:1px 1px 10px rgba(0,0,0,0.5);
+        transition: 0.4s ease;
     }
-
     .button-blue:hover {
-        background-color: #3d81c5;
+        background-color: #2576C2 !important;
     }
 </style>
-
 <x-layout>
     <div class="container mt-10">
         @if(count($files) == 0)
@@ -108,7 +107,7 @@ if ($en){
                                 <div class="mb-6 d-flex justify-content-center">
                                     <button
                                         type="submit"
-                                        class="text-white rounded py-2 px-4 button-blue" style="background-color: #0a4275;">
+                                        class="button-blue text-white rounded py-2 px-4">
                                         {{ $edit }}
                                     </button>
                                 </div>
@@ -119,7 +118,7 @@ if ($en){
             </div>
         @endif
         <div class="mb-6">
-            <a href="{{route('teacher.table')}}" class="text-white rounded py-2 px-4 button-blue">
+            <a href="{{route('teacher.table')}}" class="button-blue text-white rounded py-2 px-4">
                 {{ $seeTable }}
             </a>
         </div>

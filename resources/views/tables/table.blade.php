@@ -43,13 +43,23 @@ foreach ($users as $user) {
 }
 $usersJson = json_encode($usersArray);
 ?>
+<style>
+    .button-blue {
+        background-color: #0a4275 !important;
+        box-shadow:1px 1px 10px rgba(0,0,0,0.5);
+        transition: 0.4s ease;
+    }
+    .button-blue:hover {
+        background-color: #2576C2 !important;
+    }
+</style>
 <x-layout>
-    <div class="container d-flex justify-content-center align-items-center">
+    <div class="container d-flex justify-content-center align-items-center mt-10">
         <form action="{{ route('generate.main.csv') }}" method="POST">
             <input type="hidden" name="users" value="{{ $usersJson }}">
             <input type="hidden" name="table" value="{{ $table }}">
             @csrf
-            <button class="bg-black text-white rounded py-2 px-4 hover:bg-black" type="submit">{{$csv}}</button>
+            <button class="button-blue text-white rounded py-2 px-4" type="submit">{{$csv}}</button>
         </form>
     </div>
     <div class="container">
@@ -70,9 +80,8 @@ $usersJson = json_encode($usersArray);
                     <tr>
                         <td>{{$user->id}}</td>
                         <td>
-                            <button class='btn btn-primary'>
-                                <a class='text-decoration-none text-white'
-                                   href='/table/{{$user->id}}'>{{$user->name}}</a>
+                            <button class="button-blue text-white rounded py-1 px-2">
+                                <a href='/table/{{$user->id}}'>{{$user->name}}</a>
                             </button>
                         </td>
                         <td> {{$user->surname}}</td>
@@ -123,8 +132,6 @@ $usersJson = json_encode($usersArray);
                 },
                 responsive: true
             });
-
-
         });
     </script>
     @endif

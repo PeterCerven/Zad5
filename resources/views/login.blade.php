@@ -16,18 +16,18 @@ if ($en){
     $login = "Prihlásenie";
     $logAccout = "Prihlás sa do konta";
     $email = "Email:";
-    $password = "Hesla:";
-    $signin = "Prihlás";
+    $password = "Heslo:";
+    $signin = "Prihlásiť";
 }
 ?>
 <style>
-    button {
-        background-color: #0a4275;
+    .button-blue {
+        background-color: #0a4275 !important;
         box-shadow:1px 1px 10px rgba(0,0,0,0.5);
+        transition: 0.4s ease;
     }
-
-    button:hover {
-        background-color: #3d81c5;
+    .button-blue:hover {
+        background-color: #2576C2 !important;
     }
 </style>
 <x-layout>
@@ -74,7 +74,7 @@ if ($en){
             <div class="mb-6 d-flex justify-content-center">
                 <button
                     type="submit"
-                    class="text-white rounded py-2 px-4" style="background-color: #0a4275; box-shadow:1px 1px 10px rgba(0,0,0,0.5);">
+                    class="button-blue text-white rounded py-2 px-4">
                     {{$signin}}
                 </button>
             </div>

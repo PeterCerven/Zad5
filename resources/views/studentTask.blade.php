@@ -14,35 +14,31 @@ if ($en){
     $sub = "Submit";
     $submited = "Task already submitted";
     $noTask = "No task selected";
-    $enterT = "Anwer";
+    $enterT = "Answer";
 } else {
     $tasks = "Úloha";
     $equation = "Rovnica";
     $noAssigments = "Neboli nájdené žiadne úlohy";
     $points = "Body";
     $sub = "Predložiť";
-    $submited = "Úloha už predložená";
-    $noTask = "Žiadna selekovaná úloha";
+    $submited = "Úloha už odovzdaná";
+    $noTask = "Žiadna vybraná úloha";
     $enterT = "Odpoveď";
 }
-
-//<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-//<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.js"></script>
-//
-//<link rel="stylesheet" href="/resources/mathquill-0.10.1/mathquill-basic.css">
-//<script src="/resources/mathquill-0.10.1/mathquill.min.js"></script>
-//<script src="/resources/mathquill-0.10.1/mathquill-basic.js"></script>
- //           <script src="/resources/mathquill-0.10.1/mathquill.test.js"></script>
-//
 ?>
-
-
+<style>
+    .button-blue {
+        background-color: #0a4275 !important;
+        box-shadow:1px 1px 10px rgba(0,0,0,0.5);
+        transition: 0.4s ease;
+    }
+    .button-blue:hover {
+        background-color: #2576C2 !important;
+    }
+</style>
 <x-layout>
     <div class="container mt-5">
         <div class="align-items-center justify-content-center">
-
-
-
             <script>
                 window.addEventListener('DOMContentLoaded', () => {
                     var mathFieldSpan = document.getElementById('math-field');
@@ -78,7 +74,6 @@ if ($en){
                     </div>
                 </div>
 
-
                         <div class="form-group">
                             <form method="get" action="{{ url('student/submitTask', $assignment[0]->id) }}">
                             <p>LaTeX of what you typed: <span id="latex"></span></p>
@@ -89,54 +84,26 @@ if ($en){
                             @else
                                 <textarea disabled rows="5" class="form-control form-control-lg" placeholder={{$enterT}}   >@if ($assignment[0]->answer != null){{$assignment[0]->answer}}@endif</textarea>
                             @endif{{-- Textarea content musi byt v jednom riadku inak to tam hadze whitespaces--}}
-
-
-
-
-
-
                         </div>
-
 
                     <div class="row">
                         <div class="col">
                             @if($assignment[0]->status != \App\Enums\Status::submitted)
-                                <button class="btn btn-dark btn-lg my-3" type="submit">{{$sub}}</button>
+                                <button class="button-blue my-3 text-white rounded py-2 px-4" type="submit">{{$sub}}</button>
                             @else
-                                <button class="my-3 btn btn-dark btn-lg" disabled>{{$submited}}</button>
+                                <button class="button-blue my-3 text-white rounded py-2 px-4" disabled>{{$submited}}</button>
                             @endif
                         </div>
                         <div class="col text-right my-3 fs-3">
                             <p>{{$points}}: {{$assignment[0]->points_earned}}/{{$assignment[0]->points}}</p>
                         </div>
                     </div>
-
                 </form>
-
-
-
-
 
             @else{
         <h2>{{$noTask}}</h2>
                 }
             @endif
-
-
-
-
-
-
-
-
-
-
-
-        </div>
-        <div class="side">
-
         </div>
     </div>
-
-
 </x-layout>

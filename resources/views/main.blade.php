@@ -1,4 +1,3 @@
-
 <?php
 if (!session()->has('language')) {
     session(['language' => 'english']);
@@ -17,24 +16,24 @@ if ($en){
 ?>
 <style>
     .button-blue {
-        background-color: #0a4275;
+        background-color: #0a4275 !important;
         box-shadow:1px 1px 10px rgba(0,0,0,0.5);
+        transition: 0.4s ease;
     }
-
     .button-blue:hover {
-        background-color: #3d81c5;
+        background-color: #2576C2 !important;
     }
 </style>
 <x-layout>
     <div class="container mt-20">
         <div class="d-flex align-items-center justify-content-center">
             <div class="mb-6 me-3">
-                <a href="/teacher" class="text-white rounded py-2 px-4 button-blue">
+                <a href="/teacher" class="button-blue text-white rounded py-2 px-4">
                     {{ $toTeacherPage }}
                 </a>
             </div>
             <div class="mb-6">
-                <a href="/student" class="text-white rounded py-2 px-4 button-blue">
+                <a href="/student" class="button-blue text-white rounded py-2 px-4">
                     {{ $toStudentPage }}
                 </a>
             </div>

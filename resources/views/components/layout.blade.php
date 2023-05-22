@@ -24,17 +24,10 @@ if ($en){
 $equationFromDatabase = "y^{'''}(t)+8y^{''}(t)+19y^{'}(t)+12y(t)=u(t)";
 $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
 ?>
-
     <!DOCTYPE html>
 <html lang="sk">
 <head>
     <style>
-        .table-condensed{
-            font-size: 14px;
-        }
-        .maxwidth{
-            max-width: 250px !important;
-        }
         footer {
             position: fixed;
             bottom: 0;
@@ -52,8 +45,6 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
         }
     </style>
     <meta charset="UTF-8">
-
-    <!-- Bootstrap CSS -->
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -61,11 +52,9 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
         crossorigin="anonymous"
         referrerpolicy="no-referrer"
     />
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css">
-
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -76,10 +65,7 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
             crossorigin="anonymous"></script>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
-
     <script src="//unpkg.com/alpinejs" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Pre zobrazenie rovnic -->
@@ -95,7 +81,6 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
     <script type="text/javascript" id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
     </script>
-
     <title>
         <?php if ($en) {
             echo "Latex";
@@ -126,7 +111,6 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
     </symbol>
 </svg>
 <header>
-    <!-- navigator -->
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0a4275; box-shadow:1px 1px 10px rgba(0,0,0,0.5);" aria-label="Mynavigator">
         <div class="container">
             <a class="navbar-brand font-bold" href="/"><?php if ($en) {
@@ -171,15 +155,58 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
                     </span>
                         </li>
                         <li class="container">
-                            <a href="{{ url()->previous() }}" class="hover:text-laravel" style="color: white">
-                                <i class="fa-solid fa-arrow-left" style="color: white"></i>
-                                <?php if ($en) {
-                                    echo "
-                            Back";
-                                } else {
-                                    echo "Späť";
-                                } ?>
-                            </a>
+                            @php
+                                $currentUrl = url()->current();
+                            @endphp
+                            @switch($currentUrl)
+                                @case(Str::contains($currentUrl, 'http://zad5.test/student/showTasks'))
+                                    <a href="{{ url('http://zad5.test/student') }}" class="hover:text-laravel" style="color: white">
+                                        <i class="fa-solid fa-arrow-left" style="color: white"></i>
+                                        {{ $en ? "Back" : "Späť" }}
+                                    </a>
+                                    @break
+
+                                @case(Str::contains($currentUrl, 'http://zad5.test/student/showTask'))
+                                    <a href="{{ url('http://zad5.test/student/showTasks') }}" class="hover:text-laravel" style="color: white">
+                                        <i class="fa-solid fa-arrow-left" style="color: white"></i>
+                                        {{ $en ? "Back" : "Späť" }}
+                                    </a>
+                                    @break
+
+                                @case(Str::contains($currentUrl, 'http://zad5.test/student'))
+                                    <a href="{{ url('http://zad5.test') }}" class="hover:text-laravel" style="color: white">
+                                        <i class="fa-solid fa-arrow-left" style="color: white"></i>
+                                        {{ $en ? "Back" : "Späť" }}
+                                    </a>
+                                    @break
+
+                                @case(Str::contains($currentUrl, 'http://zad5.test/table/'))
+                                    <a href="{{ url('http://zad5.test/table') }}" class="hover:text-laravel" style="color: white">
+                                        <i class="fa-solid fa-arrow-left" style="color: white"></i>
+                                        {{ $en ? "Back" : "Späť" }}
+                                    </a>
+                                    @break
+
+                                @case(Str::contains($currentUrl, 'http://zad5.test/table'))
+                                    <a href="{{ url('http://zad5.test/teacher') }}" class="hover:text-laravel" style="color: white">
+                                        <i class="fa-solid fa-arrow-left" style="color: white"></i>
+                                        {{ $en ? "Back" : "Späť" }}
+                                    </a>
+                                    @break
+
+                                @case(Str::contains($currentUrl, 'http://zad5.test/teacher'))
+                                    <a href="{{ url('http://zad5.test') }}" class="hover:text-laravel" style="color: white">
+                                        <i class="fa-solid fa-arrow-left" style="color: white"></i>
+                                        {{ $en ? "Back" : "Späť" }}
+                                    </a>
+                                    @break
+
+                                @default
+                                    <a href="javascript:void(0);" class="hover:text-laravel" style="color: white">
+                                        <i class="fa-solid fa-arrow-left" style="color: white"></i>
+                                        {{ $en ? "Back" : "Späť" }}
+                                    </a>
+                            @endswitch
                         </li>
                         <li>
                             <form class="inline" method="POST" action="/logout" style="color: white">
@@ -201,7 +228,6 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
             </div>
         </div>
     </nav>
-    <!-- koniec navigatora -->
 </header>
 
 {{$slot}}
@@ -209,10 +235,6 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
 <footer class="footer mt-auto">
     <p class="copyright">&copy; 2023 Peter Červeň, Andrej Király, Martin Jucha a Martin Bugoš</p>
 </footer>
-
-<!-- koniec pety -->
-<script type="text/javascript">
-
-</script>
+<script type="text/javascript"></script>
 </body>
 </html>
