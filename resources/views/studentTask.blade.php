@@ -75,7 +75,7 @@ if ($en){
                 </div>
 
                         <div class="form-group">
-                            <form method="get" action="{{ url('student/submitTask', $assignment[0]->id) }}">
+                            <form method="post" action="{{ url('student/submitTask', $assignment[0]->id) }}">
                             <p>LaTeX of what you typed: <span id="latex"></span></p>
                                 <input type="text" hidden="hidden" id="latex-input" name="answer">
 

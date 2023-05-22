@@ -75,6 +75,10 @@ class TeacherController extends Controller
 
         return view('tables.studentTable', compact('assignments'));
     }
+
+    public function guide(){
+        return view('guideTeacher');
+    }
 }
 
 

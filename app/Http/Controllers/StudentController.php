@@ -178,4 +178,7 @@ class StudentController extends Controller
 
             return redirect()->back()->with('message', 'Úloha bola odoslaná.');
         }
+    public function guide(){
+        return view('guideStudent');
+    }
 }

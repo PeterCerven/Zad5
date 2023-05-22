@@ -291,8 +291,14 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
                         {{$welcome." ".auth()->user()->name}}
                     </span>
                         </li>
-                        <li style="color: white">
-                            <a href="/guide" style="text-decoration: none; color: white;">
+                        <li>
+                            <a href="/guideStudent" class="hover:text-laravel" style="text-decoration: none; color: white;">
+                                <i class="fa-solid fa-question" style="color: white"></i>
+                                {{ $en ? "Guide" : "Návod" }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/guideTeacher" class="hover:text-laravel" style="text-decoration: none; color: white;">
                                 <i class="fa-solid fa-question" style="color: white"></i>
                                 {{ $en ? "Guide" : "Návod" }}
                             </a>

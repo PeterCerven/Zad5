@@ -33,6 +33,14 @@ Route::get('/student', [StudentController::class, 'show'])
 Route::get('/login', [UserController::class, 'login'])
     ->middleware('guest');
 
+Route::get('/guideStudent',[StudentController::class,'guide'])
+    ->name('guideStudent')
+    ->middleware('is_student');
+
+Route::get('/guideTeacher',[TeacherController::class,'guide'])
+    ->name('guideTeacher')
+    ->middleware('is_teacher');
+
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
 
 Route::post('/logout', [UserController::class, 'logout'])
@@ -59,7 +67,7 @@ Route::get('student/showTasks',[StudentController::class,'showTasks'])
 Route::get('student/showTask/{id}',[StudentController::class,'showTask'])
     ->middleware('is_student');
 
-Route::get('student/submitTask/{id}',[StudentController::class,'submitTask'])
+Route::post('student/submitTask/{id}',[StudentController::class,'submitTask'])
     ->middleware('is_student');
 
 Route::post('/generate-csv',[FormController::class, 'generateCSV'])
