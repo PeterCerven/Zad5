@@ -1,5 +1,43 @@
 <?php
 use App\Http\Controllers\DBController;
+
+
+$input = "\dfrac{5s+32}{10s^2+45s+32}";
+
+
+function latexToMaxima($latexExpression)
+{
+    // Mapping rules for LaTeX to Maxima conversion
+    $mappingRules = [
+
+        '/\\\\dfrac{([^{}]+)}{([^{}]+)}/' => '($1) / ($2)',  // Fraction
+        '/\\\\sqrt{([^{}]+)}/' => 'sqrt($1)',  // Square root
+        '/\\\\sin{([^{}]+)}/' => 'sin($1)',  // Sine function
+        '/\\\\cos{([^{}]+)}/' => 'cos($1)',  // Cosine function
+        '/\)\s*([a-zA-Z]+)/' => ') * \1',
+
+
+
+
+        '/(\d+)\s*([a-z]+)/' => '\1*\2',
+        '/\\{/' => '(',  // Opening curly brace
+        '/\\}/' => ')',  // Closing curly brace
+        '/\\e/' => '%e',  // Exponential constant
+        // Add more mapping rules for other functions or expressions as needed
+    ];
+
+    // Apply the mapping rules using regular expressions
+    $maximaExpression = preg_replace(array_keys($mappingRules), array_values($mappingRules), $latexExpression);
+
+    return $maximaExpression;
+}
+
+
+$maximaExpression = latexToMaxima($input);
+echo $maximaExpression;
+
+
+
 if (!session()->has('language')) {
     session(['language' => 'english']);
 }
@@ -22,7 +60,8 @@ if ($en){
 }
 
 
-$input="\dfrac{5s+32}{10s^2+45s+32}";
+
+$input = "\dfrac{3}{2}e^{-t} + \dfrac{1}{6}e^{-3t} + \dfrac{1}{4}e^{-4t} = 0.0833 -1.5 e^{-t} + 0.1666 e^{-3t} + 0.25 e^{-4t}";
 
 // Hľadanie obsahu prvej zátvorky
 $patternA = '/\\\\d?frac{([^{}]+)}{[^{}]+}/';
@@ -38,7 +77,7 @@ $second  = $matches[1];
 $result1 = '('.$first.')'.'/'.'('.$second.')';
 $result1 = str_replace('s', '*s', $result1);
 echo "<br>";
-var_dump($result1);
+var_dump('jano '.latexToMaxima($input));
 echo "<br>";
 
 

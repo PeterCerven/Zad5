@@ -41,8 +41,12 @@ if ($en){
         <div class="align-items-center justify-content-center">
             <script>
                 window.addEventListener('DOMContentLoaded', () => {
+                    output = document.getElementById('Output');
+
+
+                    const latexEquation = '\\frac{2s^2+13s+10}{s^3+7s^2+18s+15}';
                     var mathFieldSpan = document.getElementById('math-field');
-                    var latexSpan = document.getElementById('latex');
+
                     var latexInput = document.getElementById('latex-input');
 
                     var MQ = MathQuill.getInterface(2); // for backcompat
@@ -50,8 +54,10 @@ if ($en){
                         spaceBehavesLikeTab: true, // configurable
                         handlers: {
                             edit: function() { // useful event handlers
-                                latexSpan.textContent = mathField.latex(); // simple API
-                                latexInput.value = mathField.latex(); // simple API
+
+                                latexInput.value = mathField.latex();
+
+
                             }
                         }
                     });
@@ -73,10 +79,11 @@ if ($en){
                         </div>
                     </div>
                 </div>
+            <p id="Output"></p>
 
                         <div class="form-group">
-                            <form method="post" action="{{ url('student/submitTask', $assignment[0]->id) }}">
-                            <p>LaTeX of what you typed: <span id="latex"></span></p>
+                            <form method="get" action="{{ url('student/submitTask', $assignment[0]->id) }}">
+
                                 <input type="text" hidden="hidden" id="latex-input" name="answer">
 
                             @if($assignment[0]->status==\App\Enums\Status::taken)
@@ -85,8 +92,8 @@ if ($en){
                                 <textarea disabled rows="5" class="form-control form-control-lg" placeholder={{$enterT}}   >@if ($assignment[0]->answer != null){{$assignment[0]->answer}}@endif</textarea>
                             @endif{{-- Textarea content musi byt v jednom riadku inak to tam hadze whitespaces--}}
                         </div>
-                        <p>Type math here: <span id="math-field"></span></p>
-                        <p>LaTeX of what you typed: <span id="latex"></span></p>
+
+
 
                     <div class="row">
                         <div class="col">
@@ -108,18 +115,5 @@ if ($en){
             @endif
         </div>
     </div>
-    <script>
-        var mathFieldSpan = document.getElementById('math-field');
-        var latexSpan = document.getElementById('latex');
 
-        var MQ = MathQuill.getInterface(2); // for backcompat
-        var mathField = MQ.MathField(mathFieldSpan, {
-            spaceBehavesLikeTab: true, // configurable
-            handlers: {
-                edit: function() { // useful event handlers
-                    latexSpan.textContent = mathField.latex(); // simple API
-                }
-            }
-        });
-    </script>
 </x-layout>

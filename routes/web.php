@@ -67,7 +67,7 @@ Route::get('student/showTasks',[StudentController::class,'showTasks'])
 Route::get('student/showTask/{id}',[StudentController::class,'showTask'])
     ->middleware('is_student');
 
-Route::post('student/submitTask/{id}',[StudentController::class,'submitTask'])
+Route::get('student/submitTask/{id}',[StudentController::class,'submitTask'])
     ->middleware('is_student');
 
 Route::post('/generate-csv',[FormController::class, 'generateCSV'])
