@@ -84,13 +84,13 @@ $assignmentsJson = json_encode($assignmentsArray);
                     <th class="maxwidth">{{ $task }}</th>
                     <th>{{ $equation }}</th>
                     <th>{{ $solution }}</th>
-                    @if($name =='Name')
+                    @if($name =='Meno')
                         @if( $assignment->status  == 'taken')
-                            <th>{{'Neodovzdané'}}</th>
-                            <th>{{'Neprospel'}}</th>
+                            <th>{{'Stav'}}</th>
+                            <th>{{'Verdikt'}}</th>
                         @elseif( $assignment->status  == 'submitted')
-                            <th>{{'Odovzdané'}}</th>
-                            <th>{{'Prospel'}}</th>
+                            <th>{{'Stav'}}</th>
+                            <th>{{'Verdikt'}}</th>
                         @endif
                     @else
                         <th>{{ $assignment->status }}</th>
@@ -110,7 +110,7 @@ $assignmentsJson = json_encode($assignmentsArray);
                         <td class="maxwidth">{{ $assignment->task }}</td>
                         <td>{{ '\(' . $assignment->equation . '\)' }}</td>
                         <td>{{ '\(' . $assignment->solution . '\)' }}</td>
-                        @if($name =='Name')
+                        @if($name =='Meno')
                             @if( $assignment->status  == 'taken')
                                 <td>{{'Neodovzdané'}}</td>
                                 <td>{{'Neprospel'}}</td>
@@ -120,7 +120,7 @@ $assignmentsJson = json_encode($assignmentsArray);
                             @endif
                         @else
                             <td>{{ $assignment->status }}</td>
-                            <th>{{ $verdict }}</th>
+                            <th>{{ $assignment->verdict }}</th>
                         @endif
                         <td>{{ $assignment->answer }}</td>
                         <td>{{ $assignment->points_earned }}</td>
