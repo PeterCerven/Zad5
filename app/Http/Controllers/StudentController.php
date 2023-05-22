@@ -20,9 +20,28 @@ class StudentController extends Controller
     {
 
         $generatedAssignment = [];
-        $assignments = [];
+        $assignments = DB::table('assignments')
+            ->join('latex', 'assignments.latex_id', '=', 'latex.id')
+            ->select(
+                'assignments.id',
+                'assignments.points_earned',
+                'assignments.status',
+                'assignments.verdict',
+                'assignments.answer',
+                'latex.points',
+                'latex.from',
+                'latex.to',
+                'latex.section',
+                'latex.task',
+                'latex.equation',
+                'latex.solution',
+                'latex.image_name',
+            )
+            ->where('assignments.user_id', auth()->user()->id)
+            ->get()
+            ->toArray();
 
-        return view('student', compact('generatedAssignment', 'assignments'));
+        return view('student', compact( 'assignments'));
 
     }
 
@@ -170,14 +189,17 @@ class StudentController extends Controller
                 ->toArray();
 
             $equation =$this->latexToMaxima($answer);
+
             $latexSolution =$this->latexToMaxima($assignment[0]->solution);
 
 
             if (preg_match('~^[0-9+\-*/]+$~', $latexSolution) && preg_match('~^[0-9+\-*/]+$~', $equation)) {
                 $parser = new StdMathParser();
                 $evaluator = new Evaluator();
+
                 $value1 = $parser->parse($equation)->accept($evaluator);
                 $value2 = $parser->parse($latexSolution)->accept($evaluator);
+
 
                 try {
                     if ($value1 === $value2){

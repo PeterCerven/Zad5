@@ -35,7 +35,7 @@ if ($en){
 <x-layout>
     <div class="container mt-20">
         <div class="d-flex align-items-center justify-content-center">
-            @if($generatedAssignment==null)
+            @if(count($assignments)==0)
                 <strong><p>{{$noAssigments}}</p></strong>
                 @if(session('message'))
                     <div class="alert alert-success">
@@ -43,10 +43,17 @@ if ($en){
                     </div>
                 @endif
             @else
-                <p>ID: {{ $generatedAssignment->id }}</p>
-                <p>{{$points}}: {{ $generatedAssignment->points }}</p>
-                <p>{{$from}}: {{ $generatedAssignment->from }}</p>
-                <p>{{$to}}: {{ $generatedAssignment->to }}</p>
+                @if (session('message')&&$points=='Body')
+                    <div class="alert alert-danger">
+                        {{ session('message') }}
+                    </div>
+                @elseif (session('message')&&$points=='Points')
+                    <div class="alert alert-danger">
+                        {{'No more assignments available' }}
+                    </div>
+                @endif
+
+
             @endif
         </div>
         <div class="d-flex align-items-center justify-content-center mt-10">

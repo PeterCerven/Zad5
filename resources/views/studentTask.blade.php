@@ -9,7 +9,7 @@ if (session('language') == 'english') {
 if ($en){
     $tasks = "Task";
     $equation = "Equation";
-    $noAssigments = "No Assigments found";
+    $noAssigments = "No Assignments found";
     $points = "Points";
     $sub = "Submit";
     $submited = "Task already submitted";

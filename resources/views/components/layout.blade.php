@@ -2,39 +2,13 @@
 use App\Http\Controllers\DBController;
 
 
-$input = "\dfrac{5s+32}{10s^2+45s+32}";
-
-
-function latexToMaxima($latexExpression)
-{
-    // Mapping rules for LaTeX to Maxima conversion
-    $mappingRules = [
-
-        '/\\\\dfrac{([^{}]+)}{([^{}]+)}/' => '($1) / ($2)',  // Fraction
-        '/\\\\sqrt{([^{}]+)}/' => 'sqrt($1)',  // Square root
-        '/\\\\sin{([^{}]+)}/' => 'sin($1)',  // Sine function
-        '/\\\\cos{([^{}]+)}/' => 'cos($1)',  // Cosine function
-        '/\)\s*([a-zA-Z]+)/' => ') * \1',
 
 
 
 
-        '/(\d+)\s*([a-z]+)/' => '\1*\2',
-        '/\\{/' => '(',  // Opening curly brace
-        '/\\}/' => ')',  // Closing curly brace
-        '/\\e/' => '%e',  // Exponential constant
-        // Add more mapping rules for other functions or expressions as needed
-    ];
-
-    // Apply the mapping rules using regular expressions
-    $maximaExpression = preg_replace(array_keys($mappingRules), array_values($mappingRules), $latexExpression);
-
-    return $maximaExpression;
-}
 
 
-$maximaExpression = latexToMaxima($input);
-echo $maximaExpression;
+
 
 
 
@@ -60,91 +34,6 @@ if ($en){
 }
 
 
-
-$input = "\dfrac{3}{2}e^{-t} + \dfrac{1}{6}e^{-3t} + \dfrac{1}{4}e^{-4t} = 0.0833 -1.5 e^{-t} + 0.1666 e^{-3t} + 0.25 e^{-4t}";
-
-// Hľadanie obsahu prvej zátvorky
-$patternA = '/\\\\d?frac{([^{}]+)}{[^{}]+}/';
-preg_match($patternA, $input, $matches);
-$first = $matches[1];
-var_dump($input);
-echo "<br>";
-
-// Hľadanie obsahu druhej zátvorky
-$patternB = '/\\\\d?frac{[^{}]+}{([^{}]+)}/';
-preg_match($patternB, $input, $matches);
-$second  = $matches[1];
-$result1 = '('.$first.')'.'/'.'('.$second.')';
-$result1 = str_replace('s', '*s', $result1);
-echo "<br>";
-var_dump('jano '.latexToMaxima($input));
-echo "<br>";
-
-
-$input="\dfrac{10s+64}{20s^2+90s+64}";
-
-// Hľadanie obsahu prvej zátvorky
-$patternA = '/\\\\d?frac{([^{}]+)}{[^{}]+}/';
-preg_match($patternA, $input, $matches);
-$first = $matches[1];
-var_dump($input);
-echo "<br>";
-
-// Hľadanie obsahu druhej zátvorky
-$patternB = '/\\\\d?frac{[^{}]+}{([^{}]+)}/';
-preg_match($patternB, $input, $matches);
-$second  = $matches[1];
-$result2 = '('.$first.')'.'/'.'('.$second.')';
-$result2 = str_replace('s', '*s', $result2);
-echo "<br>";
-var_dump($result2);
-echo "<br>";
-
-
-if (PHP_OS === 'WINNT') {
-    $maxima_path = "C:/Mato/maxima-5.46.0/bin/maxima.bat";
-} else {
-    $maxima_path = "/usr/bin/maxima";
-}
-
-$command = "$maxima_path -q  --batch-string=\"is(equal($result1, $result2));\" 2>&1";
-$output = shell_exec($command);
-echo $output;
-
-//$output = shell_exec("$maxima_path --nostrip --batch-string=\"load(solve); is(equal($e1, $e1));\"");
-//$output = shell_exec("$maxima_path --batch-string=\"load(solve); is($expression);\"");
-//$output = shell_exec('maxima --very-quiet --batch-string "load(solve); eq1: ' . $v1 . '; eq2: ' . $v2 . '; is(eq1 = eq2);"');
-//$output = shell_exec('maxima --very-quiet --batch-string "load(solve); is((4*x^2 + 2)/(2*x^2 + 40*x + 4) = 2/(x^3 + 20*x + 2)); "');
-//$output = shell_exec('maxima -q test.mac');
-//$output = shell_exec('maxima');
-//$aaa =is((4*x^2 + 2)/(2*x^2 + 40*x + 4) = 2/(x^3 + 20*x + 2));
-$substring="";
-$index = strpos($output, "(%o2)"); // Zistíme index začiatku "(%o2)" v reťazci
-if ($index !== false) { // Ak sa "(%o2)" v reťazci nachádza
-    $substring = substr($output, $index + 6); // Vytvoríme nový reťazec obsahujúci časť za "(%o2)"
-    //echo $substring; // Vypíšeme nový reťazec
-} else {
-    //echo "Retazec \"(%o2)\" sa v retazci nenachadza.";
-}
-//var_dump(trim($output));
-echo "\n";
-//$expression = "(4*x^2 + 2)/(2*x^2 + 40*x + 4) - (2*x^2 + 1)/(x^2 + 20*x + 2)";
-$expression = "(3/2 - 3/2*exp(-2/5*(t-4)) - 3/5*(t-4)*exp(-2/5*(t-4))) = (3/2 - 3/2*exp(-2/5*(t-4)) - 3/5*(t-4)*exp(-2/5*(t-4)))";
-$output = shell_exec("$maxima_path --batch-string=\"load(solve); algsys([$expression],[x]);\"");
-$index = strpos($output, "(%o2)"); // Zistíme index začiatku "(%o2)" v reťazci
-if ($index !== false) { // Ak sa "(%o2)" v reťazci nachádza
-    $substring = substr($output, $index + 6); // Vytvoríme nový reťazec obsahujúci časť za "(%o2)"
-    //echo $substring; // Vypíšeme nový reťazec
-} else {
-    //echo "Retazec \"(%o2)\" sa v retazci nenachadza.";
-}
-//(%o2)
-//var_dump(trim($substring));
-
-
-//(4*x^2 + 2)/(2*x^2 + 40*x + 4) = (2*x^2 + 1)/(x^2 + 20*x + 2)
-$equationFromDatabase = "y^{'''}(t)+8y^{''}(t)+19y^{'}(t)+12y(t)=u(t)";
-$initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
 ?>
     <!DOCTYPE html>
 <html lang="sk">
