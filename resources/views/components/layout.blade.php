@@ -118,7 +118,61 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
                 } else {
                     echo "Navigácia";
                 } ?></a>
-            <div class="position-absolute end-10">
+            <div class="font-bold position-absolute end-20 ">
+                @php
+                    $currentUrl = url()->current();
+                @endphp
+                @switch($currentUrl)
+                    @case(Str::contains($currentUrl, 'http://zad5.test/student/showTasks'))
+                        <a href="{{ url('http://zad5.test/student') }}" class="hover:text-laravel" style="color: white">
+                            <i class="fa-solid fa-arrow-left" style="color: white"></i>
+                            {{ $en ? "Back" : "Späť" }}
+                        </a>
+                        @break
+
+                    @case(Str::contains($currentUrl, 'http://zad5.test/student/showTask'))
+                        <a href="{{ url('http://zad5.test/student/showTasks') }}" class="hover:text-laravel" style="color: white">
+                            <i class="fa-solid fa-arrow-left" style="color: white"></i>
+                            {{ $en ? "Back" : "Späť" }}
+                        </a>
+                        @break
+
+                    @case(Str::contains($currentUrl, 'http://zad5.test/student'))
+                        <a href="{{ url('http://zad5.test') }}" class="hover:text-laravel" style="color: white">
+                            <i class="fa-solid fa-arrow-left" style="color: white"></i>
+                            {{ $en ? "Back" : "Späť" }}
+                        </a>
+                        @break
+
+                    @case(Str::contains($currentUrl, 'http://zad5.test/table/'))
+                        <a href="{{ url('http://zad5.test/table') }}" class="hover:text-laravel" style="color: white">
+                            <i class="fa-solid fa-arrow-left" style="color: white"></i>
+                            {{ $en ? "Back" : "Späť" }}
+                        </a>
+                        @break
+
+                    @case(Str::contains($currentUrl, 'http://zad5.test/table'))
+                        <a href="{{ url('http://zad5.test/teacher') }}" class="hover:text-laravel" style="color: white">
+                            <i class="fa-solid fa-arrow-left" style="color: white"></i>
+                            {{ $en ? "Back" : "Späť" }}
+                        </a>
+                        @break
+
+                    @case(Str::contains($currentUrl, 'http://zad5.test/teacher'))
+                        <a href="{{ url('http://zad5.test') }}" class="hover:text-laravel" style="color: white">
+                            <i class="fa-solid fa-arrow-left" style="color: white"></i>
+                            {{ $en ? "Back" : "Späť" }}
+                        </a>
+                        @break
+
+                    @default
+                        <a href="javascript:void(0);" class="hover:text-laravel" style="color: white">
+                            <i class="fa-solid fa-arrow-left" style="color: white"></i>
+                            {{ $en ? "Back" : "Späť" }}
+                        </a>
+                @endswitch
+            </div>
+            <div class="position-absolute mt-4 end-6">
                 <?php if (session('language') == "english"){ ?>
                 <form action="{{ route('form.process') }}" method="post">
                     @csrf
@@ -154,59 +208,11 @@ $initialConditions = '$y(0)=-1$, $y^{\'}(0)=0$ a $y^{\'\'}(0)=4$.';
                         {{$welcome." ".auth()->user()->name}}
                     </span>
                         </li>
-                        <li class="container">
-                            @php
-                                $currentUrl = url()->current();
-                            @endphp
-                            @switch($currentUrl)
-                                @case(Str::contains($currentUrl, 'http://zad5.test/student/showTasks'))
-                                    <a href="{{ url('http://zad5.test/student') }}" class="hover:text-laravel" style="color: white">
-                                        <i class="fa-solid fa-arrow-left" style="color: white"></i>
-                                        {{ $en ? "Back" : "Späť" }}
-                                    </a>
-                                    @break
-
-                                @case(Str::contains($currentUrl, 'http://zad5.test/student/showTask'))
-                                    <a href="{{ url('http://zad5.test/student/showTasks') }}" class="hover:text-laravel" style="color: white">
-                                        <i class="fa-solid fa-arrow-left" style="color: white"></i>
-                                        {{ $en ? "Back" : "Späť" }}
-                                    </a>
-                                    @break
-
-                                @case(Str::contains($currentUrl, 'http://zad5.test/student'))
-                                    <a href="{{ url('http://zad5.test') }}" class="hover:text-laravel" style="color: white">
-                                        <i class="fa-solid fa-arrow-left" style="color: white"></i>
-                                        {{ $en ? "Back" : "Späť" }}
-                                    </a>
-                                    @break
-
-                                @case(Str::contains($currentUrl, 'http://zad5.test/table/'))
-                                    <a href="{{ url('http://zad5.test/table') }}" class="hover:text-laravel" style="color: white">
-                                        <i class="fa-solid fa-arrow-left" style="color: white"></i>
-                                        {{ $en ? "Back" : "Späť" }}
-                                    </a>
-                                    @break
-
-                                @case(Str::contains($currentUrl, 'http://zad5.test/table'))
-                                    <a href="{{ url('http://zad5.test/teacher') }}" class="hover:text-laravel" style="color: white">
-                                        <i class="fa-solid fa-arrow-left" style="color: white"></i>
-                                        {{ $en ? "Back" : "Späť" }}
-                                    </a>
-                                    @break
-
-                                @case(Str::contains($currentUrl, 'http://zad5.test/teacher'))
-                                    <a href="{{ url('http://zad5.test') }}" class="hover:text-laravel" style="color: white">
-                                        <i class="fa-solid fa-arrow-left" style="color: white"></i>
-                                        {{ $en ? "Back" : "Späť" }}
-                                    </a>
-                                    @break
-
-                                @default
-                                    <a href="javascript:void(0);" class="hover:text-laravel" style="color: white">
-                                        <i class="fa-solid fa-arrow-left" style="color: white"></i>
-                                        {{ $en ? "Back" : "Späť" }}
-                                    </a>
-                            @endswitch
+                        <li style="color: white">
+                            <a href="/guide" style="text-decoration: none; color: white;">
+                                <i class="fa-solid fa-question" style="color: white"></i>
+                                {{ $en ? "Guide" : "Návod" }}
+                            </a>
                         </li>
                         <li>
                             <form class="inline" method="POST" action="/logout" style="color: white">
