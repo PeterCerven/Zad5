@@ -84,8 +84,19 @@ $assignmentsJson = json_encode($assignmentsArray);
                     <th class="maxwidth">{{ $task }}</th>
                     <th>{{ $equation }}</th>
                     <th>{{ $solution }}</th>
-                    <th>{{ $status }}</th>
-                    <th>{{ $verdict }}</th>
+                    @if($name =='Name')
+                        @if( $assignment->status  == 'taken')
+                            <td>{{'Neodovzdané'}}</td>
+                            <td>{{'Neprospel'}}</td>
+                        @elseif( $assignment->status  == 'submitted')
+                            <td>{{'Odovzdané'}}</td>
+                            <td>{{'Prospel'}}</td>
+                        @endif
+                    @else
+                        <td>{{ $assignment->status }}</td>
+                        <th>{{ $verdict }}</th>
+                    @endif
+
                     <th>{{ $answer }}</th>
                     <th>{{ $points }}</th>
                 </tr>
