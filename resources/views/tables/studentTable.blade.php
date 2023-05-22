@@ -86,14 +86,14 @@ $assignmentsJson = json_encode($assignmentsArray);
                     <th>{{ $solution }}</th>
                     @if($name =='Name')
                         @if( $assignment->status  == 'taken')
-                            <td>{{'Neodovzdané'}}</td>
-                            <td>{{'Neprospel'}}</td>
+                            <th>{{'Neodovzdané'}}</th>
+                            <th>{{'Neprospel'}}</th>
                         @elseif( $assignment->status  == 'submitted')
-                            <td>{{'Odovzdané'}}</td>
-                            <td>{{'Prospel'}}</td>
+                            <th>{{'Odovzdané'}}</th>
+                            <th>{{'Prospel'}}</th>
                         @endif
                     @else
-                        <td>{{ $assignment->status }}</td>
+                        <th>{{ $assignment->status }}</th>
                         <th>{{ $verdict }}</th>
                     @endif
 
@@ -110,8 +110,18 @@ $assignmentsJson = json_encode($assignmentsArray);
                         <td class="maxwidth">{{ $assignment->task }}</td>
                         <td>{{ '\(' . $assignment->equation . '\)' }}</td>
                         <td>{{ '\(' . $assignment->solution . '\)' }}</td>
-                        <td>{{ $assignment->status }}</td>
-                        <td>{{ $assignment->verdict }}</td>
+                        @if($name =='Name')
+                            @if( $assignment->status  == 'taken')
+                                <td>{{'Neodovzdané'}}</td>
+                                <td>{{'Neprospel'}}</td>
+                            @elseif( $assignment->status  == 'submitted')
+                                <td>{{'Odovzdané'}}</td>
+                                <td>{{'Prospel'}}</td>
+                            @endif
+                        @else
+                            <td>{{ $assignment->status }}</td>
+                            <th>{{ $verdict }}</th>
+                        @endif
                         <td>{{ $assignment->answer }}</td>
                         <td>{{ $assignment->points_earned }}</td>
                     </tr>
