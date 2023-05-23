@@ -20,7 +20,7 @@ if ($en){
     $equation = "Rovnica";
     $noAssigments = "Neboli nájdené žiadne úlohy";
     $points = "Body";
-    $sub = "Predložiť";
+    $sub = "Odovzdať";
     $submited = "Úloha už odovzdaná";
     $noTask = "Žiadna vybraná úloha";
     $enterT = "Odpoveď";

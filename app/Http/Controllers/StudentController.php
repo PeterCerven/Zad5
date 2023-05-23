@@ -13,7 +13,6 @@ use node_modules\mathjs\dist\math;
 use MathParser\StdMathParser;
 use MathParser\Interpreting\Evaluator;
 
-
 class StudentController extends Controller
 {
     public function show()
@@ -72,8 +71,6 @@ class StudentController extends Controller
         $availableAssignments = array_values(array_filter($allAssignments, function ($assignment) use ($existingAssignments) {
             return !in_array($assignment->id, $existingAssignments);
         }));
-
-
         if (empty($availableAssignments)) {
                 //
                 return redirect()->back()->with('message', 'Žiadne úlohy nie sú k dispozícii.');
@@ -126,10 +123,6 @@ class StudentController extends Controller
 
         public function showTask($assignment_id)
         {
-
-
-
-
             $studentId = auth()->user()->id;
             $assignment = DB::table('assignments')
                 ->join('latex', 'assignments.latex_id', '=', 'latex.id')
@@ -153,8 +146,6 @@ class StudentController extends Controller
                 ->get();
 
             return view('studentTask', compact('assignment'));
-
-
         }
 
         public function submitTask ($assignment_id)
@@ -192,14 +183,12 @@ class StudentController extends Controller
 
             $latexSolution =$this->latexToMaxima($assignment[0]->solution);
 
-
             if (preg_match('~^[0-9+\-*/]+$~', $latexSolution) && preg_match('~^[0-9+\-*/]+$~', $equation)) {
                 $parser = new StdMathParser();
                 $evaluator = new Evaluator();
 
                 $value1 = $parser->parse($equation)->accept($evaluator);
                 $value2 = $parser->parse($latexSolution)->accept($evaluator);
-
 
                 try {
                     if ($value1 === $value2){
@@ -214,11 +203,7 @@ class StudentController extends Controller
                     $verdict = Verdict::bad;
                     $points_earned = 0;
                 }
-
-
                 }else {
-
-
                 $maximaCommandAnswer = 'expand(solve(' . $equation . ')); ';
                 $maximaCommandSolution = 'expand(solve(' . $latexSolution . ')); ';
                 $outputAnswer = shell_exec("$maxima_path --very-quiet --batch-string=\"load(solve); $maximaCommandAnswer\"");
@@ -233,12 +218,10 @@ class StudentController extends Controller
                     $points_earned = 0;
                 }
 
-
                 if ($answer == $assignment[0]->solution) {
                     $verdict = Verdict::good;
                     $points_earned = $assignment[0]->points;
                 }
-
 
                 foreach (array_reverse($lines) as $line) {
                     if (strpos($line, 'solve(') !== false) {
@@ -248,10 +231,6 @@ class StudentController extends Controller
                     }
                 }
             }
-
-
-
-
 
             DB::table('assignments')
                 ->where('id', $assignment_id)
@@ -291,5 +270,7 @@ class StudentController extends Controller
 
         return $maximaExpression;
     }
-
+    public function guide(){
+        return view('guideStudent');
+    }
 }

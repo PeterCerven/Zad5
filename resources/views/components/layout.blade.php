@@ -1,17 +1,6 @@
 <?php
 use App\Http\Controllers\DBController;
 
-
-
-
-
-
-
-
-
-
-
-
 if (!session()->has('language')) {
     session(['language' => 'english']);
 }
@@ -32,7 +21,6 @@ if ($en){
     $logout = "Odhlásenie";
     $login = "Prihlásenie";
 }
-
 
 ?>
     <!DOCTYPE html>

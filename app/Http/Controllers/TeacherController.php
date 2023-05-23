@@ -23,8 +23,6 @@ class TeacherController extends Controller
         $to = $request->input('to');
         $points = $request->input('points');
 
-
-
         LatexData::where('name', $name)
             ->update([
                 'from' => $from,
@@ -71,7 +69,6 @@ class TeacherController extends Controller
             )
             ->where('assignments.user_id', '=', $user->id)
             ->get();
-
 
         return view('tables.studentTable', compact('assignments'));
     }
