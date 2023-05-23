@@ -24,13 +24,16 @@ Route::get('/', function () {
 Route::post('/main', [FormController::class, 'processForm'])
     ->name('form.process');
 
-Route::get('/teacher', [TeacherController::class, 'index'])
+Route::get('/teachers', [TeacherController::class, 'index'])
+    ->name('teachers.index')
     ->middleware('is_teacher');
 
 Route::get('/student', [StudentController::class, 'show'])
+    ->name('student.show')
     ->middleware('is_student');
 
 Route::get('/login', [UserController::class, 'login'])
+    ->name('login')
     ->middleware('guest');
 
 Route::get('/guideStudent',[StudentController::class,'guide'])
@@ -41,9 +44,13 @@ Route::get('/guideTeacher',[TeacherController::class,'guide'])
     ->name('guideTeacher')
     ->middleware('is_teacher');
 
-Route::post('/users/authenticate', [UserController::class, 'authenticate']);
+Route::post('/users/authenticate', [UserController::class, 'authenticate'])
+    ->name('users.authenticate')
+    ->middleware('guest');
+
 
 Route::post('/logout', [UserController::class, 'logout'])
+    ->name('logout')
     ->middleware('auth');
 
 Route::post('/file/edit/{name}', [TeacherController::class, 'edit'])
@@ -60,14 +67,18 @@ Route::get('/table/{user}', [TeacherController::class, 'studentTable'])
 
 
 //TODO: zmenit niektore metody na post
-Route::get('student/generateNewTask',[StudentController::class,'generateNewTask'])
+Route::get('/student/generateNewTask',[StudentController::class,'generateNewTask'])
+    ->name('student.generateNewTask')
     ->middleware('is_student');
-Route::get('student/showTasks',[StudentController::class,'showTasks'])
+Route::get('/student/showTasks',[StudentController::class,'showTasks'])
+    ->name('student.showTasks')
     ->middleware('is_student');
-Route::get('student/showTask/{id}',[StudentController::class,'showTask'])
+Route::get('/student/showTask/{id}',[StudentController::class,'showTask'])
+    ->name('student.showTask')
     ->middleware('is_student');
 
-Route::get('student/submitTask/{id}',[StudentController::class,'submitTask'])
+Route::get('/student/submitTask/{id}',[StudentController::class,'submitTask'])
+    ->name('student.submitTask')
     ->middleware('is_student');
 
 Route::post('/generate-csv',[FormController::class, 'generateCSV'])

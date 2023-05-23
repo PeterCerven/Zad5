@@ -55,14 +55,14 @@ if ($en){
             @endif
         </div>
         <div class="d-flex align-items-center justify-content-center mt-10">
-            <form method="get" action="/student/generateNewTask">
+            <form method="get" action="{{route('student.generateNewTask')}}">
                 <button
                     class="button-blue text-white rounded py-2 px-4 me-3"
                     type="submit">
                     {{$set}}
                 </button>
             </form>
-            <form method="get" action="/student/showTasks">
+            <form method="get" action="{{route('student.showTasks')}}">
                 <button
                     class="button-blue text-white rounded py-2 px-4"
                     type="submit">

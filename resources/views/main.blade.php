@@ -28,12 +28,12 @@ if ($en){
     <div class="container mt-20">
         <div class="d-flex align-items-center justify-content-center">
             <div class="mb-6 me-3">
-                <a href="/teacher" class="button-blue text-white rounded py-2 px-4">
+                <a href="{{route('teachers.index')}}" class="button-blue text-white rounded py-2 px-4">
                     {{ $toTeacherPage }}
                 </a>
             </div>
             <div class="mb-6">
-                <a href="/student" class="button-blue text-white rounded py-2 px-4">
+                <a href="{{route('student.show')}}" class="button-blue text-white rounded py-2 px-4">
                     {{ $toStudentPage }}
                 </a>
             </div>

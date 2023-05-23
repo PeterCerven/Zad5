@@ -6,7 +6,7 @@ $en = false;
 if (session('language') == 'english') {
     $en = true;
 }
-if ($en){
+if ($en) {
     $tasks = "Task";
     $equation = "Equation";
     $noAssigments = "No Assignments found";
@@ -29,9 +29,10 @@ if ($en){
 <style>
     .button-blue {
         background-color: #0a4275 !important;
-        box-shadow:1px 1px 10px rgba(0,0,0,0.5);
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
         transition: 0.4s ease;
     }
+
     .button-blue:hover {
         background-color: #2576C2 !important;
     }
@@ -53,7 +54,7 @@ if ($en){
                     var mathField = MQ.MathField(mathFieldSpan, {
                         spaceBehavesLikeTab: true, // configurable
                         handlers: {
-                            edit: function() { // useful event handlers
+                            edit: function () { // useful event handlers
 
                                 latexInput.value = mathField.latex();
 
@@ -79,19 +80,20 @@ if ($en){
                         </div>
                     </div>
                 </div>
-            <p id="Output"></p>
+                <p id="Output"></p>
 
-                        <div class="form-group">
-                            <form method="get" action="{{ url('student/submitTask', $assignment[0]->id) }}">
+{{--                <form method="get" action="{{ route('student.submitTask', ['id' => $assignment[0]->id] }}">--}}
+                    <div class="form-group">
+                        <form method="get" action="{{ url('student/submitTask', $assignment[0]->id) }}">
 
-                                <input type="text" hidden="hidden" id="latex-input" name="answer">
+                            <input type="text" hidden="hidden" id="latex-input" name="answer">
 
                             @if($assignment[0]->status==\App\Enums\Status::taken)
-                                    <span style="width: 600px; height: 100px; font-size: 25px" id="math-field"></span>
+                                <span style="width: 600px; height: 100px; font-size: 25px" id="math-field"></span>
                             @else
                                 <textarea disabled rows="5" class="form-control form-control-lg" placeholder={{$enterT}}   >@if ($assignment[0]->answer != null){{$assignment[0]->answer}}@endif</textarea>
-                            @endif{{-- Textarea content musi byt v jednom riadku inak to tam hadze whitespaces--}}
-                        </div>
+                        @endif{{-- Textarea content musi byt v jednom riadku inak to tam hadze whitespaces--}}
+                    </div>
 
 
 
@@ -109,8 +111,9 @@ if ($en){
                     </div>
                 </form>
 
-            @else{
-        <h2>{{$noTask}}</h2>
+            @else
+                {
+                <h2>{{$noTask}}</h2>
                 }
             @endif
         </div>

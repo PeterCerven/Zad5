@@ -130,43 +130,43 @@ if ($en){
                     $currentUrl = url()->current();
                 @endphp
                 @switch($currentUrl)
-                    @case(Str::contains($currentUrl, 'http://zad5.test/student/showTasks'))
-                        <a href="{{ url('http://zad5.test/student') }}" class="hover:text-laravel" style="color: white">
+                    @case(Str::contains($currentUrl, 'https://site71.webte.fei.stuba.sk/student/showTasks'))
+                        <a href="{{ route('student.show') }}" class="hover:text-laravel" style="color: white">
                             <i class="fa-solid fa-arrow-left" style="color: white"></i>
                             {{ $en ? "Back" : "Späť" }}
                         </a>
                         @break
 
-                    @case(Str::contains($currentUrl, 'http://zad5.test/student/showTask'))
-                        <a href="{{ url('http://zad5.test/student/showTasks') }}" class="hover:text-laravel" style="color: white">
+                    @case(Str::contains($currentUrl, 'https://site71.webte.fei.stuba.sk/student/showTask'))
+                        <a href="{{ route('student.showTasks') }}" class="hover:text-laravel" style="color: white">
                             <i class="fa-solid fa-arrow-left" style="color: white"></i>
                             {{ $en ? "Back" : "Späť" }}
                         </a>
                         @break
 
-                    @case(Str::contains($currentUrl, 'http://zad5.test/student'))
-                        <a href="{{ url('http://zad5.test') }}" class="hover:text-laravel" style="color: white">
+                    @case(Str::contains($currentUrl, 'https://site71.webte.fei.stuba.sk/student'))
+                        <a href="{{ route('home') }}" class="hover:text-laravel" style="color: white">
                             <i class="fa-solid fa-arrow-left" style="color: white"></i>
                             {{ $en ? "Back" : "Späť" }}
                         </a>
                         @break
 
-                    @case(Str::contains($currentUrl, 'http://zad5.test/table/'))
-                        <a href="{{ url('http://zad5.test/table') }}" class="hover:text-laravel" style="color: white">
+                    @case(Str::contains($currentUrl, 'https://site71.webte.fei.stuba.sk/table/'))
+                        <a href="{{ route('teacher.table') }}" class="hover:text-laravel" style="color: white">
                             <i class="fa-solid fa-arrow-left" style="color: white"></i>
                             {{ $en ? "Back" : "Späť" }}
                         </a>
                         @break
 
-                    @case(Str::contains($currentUrl, 'http://zad5.test/table'))
-                        <a href="{{ url('http://zad5.test/teacher') }}" class="hover:text-laravel" style="color: white">
+                    @case(Str::contains($currentUrl, 'https://site71.webte.fei.stuba.sk/table'))
+                        <a href="{{ route('teachers.index') }}" class="hover:text-laravel" style="color: white">
                             <i class="fa-solid fa-arrow-left" style="color: white"></i>
                             {{ $en ? "Back" : "Späť" }}
                         </a>
                         @break
 
-                    @case(Str::contains($currentUrl, 'http://zad5.test/teacher'))
-                        <a href="{{ url('http://zad5.test') }}" class="hover:text-laravel" style="color: white">
+                    @case(Str::contains($currentUrl, 'https://site71.webte.fei.stuba.sk/teacher'))
+                        <a href="{{ route('home') }}" class="hover:text-laravel" style="color: white">
                             <i class="fa-solid fa-arrow-left" style="color: white"></i>
                             {{ $en ? "Back" : "Späť" }}
                         </a>
@@ -218,14 +218,14 @@ if ($en){
 
                         @if(!Auth::user()->is_teacher)
                             <li>
-                                <a href="/guideStudent" class="hover:text-laravel" style="text-decoration: none; color: white;">
+                                <a href="{{ route('guideStudent') }}" class="hover:text-laravel" style="text-decoration: none; color: white;">
                                     <i class="fa-solid fa-question" style="color: white"></i>
                                     {{ $en ? "Guide" : "Návod" }}
                                 </a>
                             </li>
                         @elseif(Auth::user()->is_teacher)
                             <li>
-                                <a href="/guideTeacher" class="hover:text-laravel" style="text-decoration: none; color: white;">
+                                <a href="{{ route('guideTeacher') }}" class="hover:text-laravel" style="text-decoration: none; color: white;">
                                     <i class="fa-solid fa-question" style="color: white"></i>
                                     {{ $en ? "Guide" : "Návod" }}
                                 </a>

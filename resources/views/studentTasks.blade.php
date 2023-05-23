@@ -89,7 +89,7 @@ if ($en){
                             @endif
 
                             <td>
-                                <form method="get" action="{{ url('student/showTask', $assignment->id) }}">
+                                <form method="get" action="{{ route('student.showTask', ["id" => $assignment->id]) }}">
                                     <button class="button-blue text-white rounded py-1 px-2" type="submit">{{$oAssigments}}</button>
                                 </form>
 

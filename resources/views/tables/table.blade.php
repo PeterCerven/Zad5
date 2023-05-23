@@ -81,7 +81,7 @@ $usersJson = json_encode($usersArray);
                         <td>{{$user->id}}</td>
                         <td>
                             <button class="button-blue text-white rounded py-1 px-2">
-                                <a href='/table/{{$user->id}}'>{{$user->name}}</a>
+                                <a href='{{ route("teacher.studentTable", ["user" => $user->id]) }}'>{{ $user->name }}</a>
                             </button>
                         </td>
                         <td> {{$user->surname}}</td>
